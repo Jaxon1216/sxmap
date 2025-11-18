@@ -286,8 +286,7 @@ export function createLocationMarker(
   if (isCurrent && currentEvent) {
     const popupContent = `
       <div style="font-family: sans-serif;">
-        <div style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">${currentEvent.date}</div>
-        <div style="font-size: 13px; color: #666; margin-bottom: 4px;">${location}</div>
+        <div style="font-size: 14px; margin-bottom: 4px;"><span style="margin-right: 10px;">${currentEvent.date}</span><span style="color: #666;">${location}</span></div>
         <div style="font-size: 13px;">${currentEvent.event}</div>
       </div>
     `;
