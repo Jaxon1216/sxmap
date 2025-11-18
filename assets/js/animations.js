@@ -2,9 +2,9 @@
  * 动画设置控制模块
  */
 
-import { state } from './state.js';
-import { CAMERA_SPEED_LEVELS } from './config.js';
-import { togglePlay, updateSpeedUI } from './controls.js';
+import { state } from "./state.js";
+import { CAMERA_SPEED_LEVELS } from "./config.js";
+import { togglePlay, updateSpeedUI } from "./controls.js";
 
 /**
  * 初始化动画控制滑块
@@ -107,7 +107,9 @@ function updateAnimationDuration(duration) {
  */
 export function initCustomSpeedSelect() {
   const customSelect = document.getElementById("custom-speed-select");
-  if (!customSelect) return;
+  if (!customSelect) {
+    return;
+  }
 
   const selectDisplay = customSelect.querySelector(".select-display");
   const selectText = customSelect.querySelector(".select-text");
@@ -117,7 +119,9 @@ export function initCustomSpeedSelect() {
   let isOpen = false;
 
   function openDropdown() {
-    if (isOpen) return;
+    if (isOpen) {
+      return;
+    }
 
     isOpen = true;
     customSelect.classList.add("open");
@@ -128,7 +132,9 @@ export function initCustomSpeedSelect() {
   }
 
   function closeDropdown() {
-    if (!isOpen) return;
+    if (!isOpen) {
+      return;
+    }
 
     isOpen = false;
     customSelect.classList.remove("open");
@@ -221,8 +227,12 @@ export function initCustomSpeedSelect() {
     );
     let newIndex = currentIndex + direction;
 
-    if (newIndex < 0) newIndex = options.length - 1;
-    if (newIndex >= options.length) newIndex = 0;
+    if (newIndex < 0) {
+      newIndex = options.length - 1;
+    }
+    if (newIndex >= options.length) {
+      newIndex = 0;
+    }
 
     options.forEach((opt) => opt.classList.remove("selected"));
     options[newIndex].classList.add("selected");

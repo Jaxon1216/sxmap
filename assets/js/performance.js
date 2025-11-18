@@ -2,9 +2,9 @@
  * 性能优化模块
  */
 
-import { state } from './state.js';
-import { isMobileDevice } from './utils.js';
-import { batchAnimatePathsDisappear, createMotionPath } from './paths.js';
+import { state } from "./state.js";
+import { isMobileDevice } from "./utils.js";
+import { batchAnimatePathsDisappear, createMotionPath } from "./paths.js";
 
 /**
  * 检查 leaflet.motion 插件是否正确加载
@@ -68,7 +68,9 @@ export function cleanupMotionResources() {
  * 预加载关键路径动画
  */
 export function preloadKeyAnimations() {
-  if (!state.trajectoryData || !state.trajectoryData.events) return;
+  if (!state.trajectoryData || !state.trajectoryData.events) {
+    return;
+  }
 
   const keyEvents = state.trajectoryData.events.slice(
     0,
@@ -191,7 +193,9 @@ export function monitorMotionPerformance() {
   let isMonitoring = false;
 
   function measureFPS() {
-    if (!isMonitoring) return;
+    if (!isMonitoring) {
+      return;
+    }
 
     frameCount++;
     const currentTime = Date.now();

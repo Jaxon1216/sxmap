@@ -2,9 +2,9 @@
  * 数据加载模块
  */
 
-import { state } from './state.js';
-import { INTERNATIONAL_COORDINATES } from './config.js';
-import { getCoordinates, getCoordinatesWithLocation } from './coordinates.js';
+import { state } from "./state.js";
+import { INTERNATIONAL_COORDINATES } from "./config.js";
+import { getCoordinates, getCoordinatesWithLocation } from "./coordinates.js";
 
 /**
  * 从地区数据构建坐标映射表

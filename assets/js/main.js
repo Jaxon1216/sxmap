@@ -4,21 +4,21 @@
  * GitHub: https://github.com/sansan0/mao-map
  */
 
-import { state } from './state.js';
-import { isMobileDevice, hideLoading } from './utils.js';
-import { initMap } from './map.js';
-import { loadGeographicData, loadTrajectoryData } from './data-loader.js';
-import { showEventAtIndex } from './paths.js';
-import { updateStatistics } from './ui-updates.js';
-import { bindEvents } from './events.js';
-import { forceStopPoetryAnimation } from './poetry.js';
-import { 
-  checkMotionPlugin, 
-  cleanupMotionResources, 
-  optimizeMotionPerformance, 
-  preloadKeyAnimations, 
-  monitorMotionPerformance 
-} from './performance.js';
+import { state } from "./state.js";
+import { isMobileDevice, hideLoading } from "./utils.js";
+import { initMap } from "./map.js";
+import { loadGeographicData, loadTrajectoryData } from "./data-loader.js";
+import { showEventAtIndex } from "./paths.js";
+import { updateStatistics } from "./ui-updates.js";
+import { bindEvents } from "./events.js";
+import { forceStopPoetryAnimation } from "./poetry.js";
+import {
+  checkMotionPlugin,
+  cleanupMotionResources,
+  optimizeMotionPerformance,
+  preloadKeyAnimations,
+  monitorMotionPerformance
+} from "./performance.js";
 
 /**
  * 初始化应用
@@ -65,7 +65,9 @@ async function initApp() {
         "[id^='total-event-count']"
       );
       totalCountEls.forEach((el) => {
-        if (el) el.textContent = state.trajectoryData.events.length;
+        if (el) {
+          el.textContent = state.trajectoryData.events.length;
+        }
       });
 
       updateStatistics();

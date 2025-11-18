@@ -2,14 +2,14 @@
  * 事件绑定模块
  */
 
-import { state } from './state.js';
-import { isMobileDevice } from './utils.js';
-import { togglePlay, previousEvent, nextEvent, handleTimelineKeydown, copyCurrentEventData } from './controls.js';
-import { showEventAtIndex } from './paths.js';
-import { initAnimationControls, initCustomSpeedSelect } from './animations.js';
-import { initStatsHover, initDetailPanel } from './panels.js';
-import { initMobileInteractions } from './mobile.js';
-import { initCameraFollowControl } from './camera.js';
+import { state } from "./state.js";
+import { isMobileDevice } from "./utils.js";
+import { togglePlay, previousEvent, nextEvent, handleTimelineKeydown, copyCurrentEventData } from "./controls.js";
+import { showEventAtIndex } from "./paths.js";
+import { initAnimationControls, initCustomSpeedSelect } from "./animations.js";
+import { initStatsHover, initDetailPanel } from "./panels.js";
+import { initMobileInteractions } from "./mobile.js";
+import { initCameraFollowControl } from "./camera.js";
 
 /**
  * 绑定所有事件监听器
@@ -19,9 +19,15 @@ export function bindEvents() {
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
 
-  if (playBtn) playBtn.addEventListener("click", togglePlay);
-  if (prevBtn) prevBtn.addEventListener("click", previousEvent);
-  if (nextBtn) nextBtn.addEventListener("click", nextEvent);
+  if (playBtn) {
+    playBtn.addEventListener("click", togglePlay);
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener("click", previousEvent);
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", nextEvent);
+  }
 
   const slider = document.getElementById("timeline-slider");
   if (slider) {
@@ -120,7 +126,7 @@ export function bindEvents() {
 
   const speedBtns = document.querySelectorAll(".speed-btn");
   speedBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", (_e) => {
       speedBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       state.currentPlaySpeed = parseInt(btn.dataset.speed);

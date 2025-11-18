@@ -2,11 +2,11 @@
  * 路径创建和动画模块
  */
 
-import { state } from './state.js';
-import { updateEventMarkers } from './markers.js';
-import { updateCurrentEventInfo, updateProgress } from './ui-updates.js';
-import { handleCameraFollow } from './camera.js';
-import { ensureMarkersInteractivity } from './map.js';
+import { state } from "./state.js";
+import { updateEventMarkers } from "./markers.js";
+import { updateCurrentEventInfo, updateProgress } from "./ui-updates.js";
+import { handleCameraFollow } from "./camera.js";
+import { ensureMarkersInteractivity } from "./map.js";
 
 /**
  * 创建 motion 动画路径
@@ -20,7 +20,9 @@ export function createMotionPath(
   isConnectionPath = false,
   isReverse = false
 ) {
-  if (!fromCoords || !toCoords) return null;
+  if (!fromCoords || !toCoords) {
+    return null;
+  }
 
   const pathCoords = [];
 
@@ -54,7 +56,7 @@ export function createMotionPath(
     dashArray: isConnectionPath ? "4, 8" : "8, 8",
   };
 
-  let effectiveDuration = state.isDragging ? 1 : state.animationConfig.pathDuration;
+  const effectiveDuration = state.isDragging ? 1 : state.animationConfig.pathDuration;
 
   const motionOptions = {
     auto: state.isDragging ? true : false,
@@ -86,7 +88,9 @@ export function createMotionPath(
  * 更新路径样式
  */
 export function updatePathStyle(path, isLatest) {
-  if (!path) return;
+  if (!path) {
+    return;
+  }
 
   const color = isLatest ? "#c0392b" : "#85c1e9";
   const opacity = isLatest ? 0.9 : 0.6;
@@ -167,7 +171,9 @@ export function updatePathsStatic(targetIndex) {
  * 创建路径消失动画
  */
 export function animatePathDisappear(path) {
-  if (!path || !path._map) return;
+  if (!path || !path._map) {
+    return;
+  }
 
   const pathElement = path._path;
   if (!pathElement) {
@@ -197,7 +203,9 @@ export function animatePathDisappear(path) {
  * 批量执行路径消失动画
  */
 export function batchAnimatePathsDisappear(paths, staggerDelay = 200) {
-  if (!paths || paths.length === 0) return;
+  if (!paths || paths.length === 0) {
+    return;
+  }
 
   return new Promise((resolve) => {
     let completedCount = 0;
@@ -291,9 +299,12 @@ export function updatePathsAnimated(targetIndex, isReverse = false) {
  * 显示指定索引的事件
  */
 export function showEventAtIndex(index, animated = true, isUserDrag = false) {
-  if (!state.trajectoryData || index >= state.trajectoryData.events.length || index < 0)
+  if (!state.trajectoryData || index >= state.trajectoryData.events.length || index < 0) {
     return;
-  if (state.animationConfig.isAnimating && !isUserDrag) return;
+  }
+  if (state.animationConfig.isAnimating && !isUserDrag) {
+    return;
+  }
 
   const isMovingForward = index > state.currentEventIndex;
   const isMovingBackward = index < state.currentEventIndex;

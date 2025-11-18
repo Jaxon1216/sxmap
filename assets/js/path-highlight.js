@@ -2,7 +2,7 @@
  * 路径高亮功能模块
  */
 
-import { state } from './state.js';
+import { state } from "./state.js";
 
 /**
  * 高亮指定事件的路径

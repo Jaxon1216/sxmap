@@ -2,8 +2,8 @@
  * 地图初始化和基础功能
  */
 
-import { state } from './state.js';
-import { isMobileDevice } from './utils.js';
+import { state } from "./state.js";
+// import { isMobileDevice } from "./utils.js";
 
 /**
  * 初始化Leaflet地图

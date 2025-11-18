@@ -2,8 +2,8 @@
  * 移动端交互模块
  */
 
-import { state } from './state.js';
-import { isMobileDevice } from './utils.js';
+import { state } from "./state.js";
+import { isMobileDevice } from "./utils.js";
 
 /**
  * 切换控制面板显示/隐藏状态

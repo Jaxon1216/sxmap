@@ -2,9 +2,9 @@
  * 面板控制模块
  */
 
-import { state } from './state.js';
-import { isMobileDevice } from './utils.js';
-import { highlightEventPath, clearPathHighlight, quickClearPathHighlight } from './path-highlight.js';
+import { state } from "./state.js";
+import { isMobileDevice } from "./utils.js";
+import { highlightEventPath, clearPathHighlight, quickClearPathHighlight } from "./path-highlight.js";
 
 /**
  * 显示地点详细信息面板
@@ -16,7 +16,9 @@ export function showDetailPanel(locationGroup) {
   const summaryEl = document.getElementById("panel-visit-summary");
   const contentEl = document.getElementById("panel-content");
 
-  if (!panel || !titleEl || !summaryEl || !contentEl) return;
+  if (!panel || !titleEl || !summaryEl || !contentEl) {
+    return;
+  }
 
   const { location, events } = locationGroup;
   const visitCount = events.length;
@@ -30,12 +32,22 @@ export function showDetailPanel(locationGroup) {
 
   let summaryText = `截止当前时间点共 <span class="visit-count-highlight">${visitCount}</span> 次相关记录`;
 
-  let descParts = [];
-  if (birthCount > 0) descParts.push(`${birthCount}次出生`);
-  if (destCount > 0) descParts.push(`${destCount}次到达`);
-  if (startCount > 0) descParts.push(`${startCount}次出发`);
-  if (transitCount > 0) descParts.push(`${transitCount}次途径`);
-  if (activityCount > 0) descParts.push(`${activityCount}次活动`);
+  const descParts = [];
+  if (birthCount > 0) {
+    descParts.push(`${birthCount}次出生`);
+  }
+  if (destCount > 0) {
+    descParts.push(`${destCount}次到达`);
+  }
+  if (startCount > 0) {
+    descParts.push(`${startCount}次出发`);
+  }
+  if (transitCount > 0) {
+    descParts.push(`${transitCount}次途径`);
+  }
+  if (activityCount > 0) {
+    descParts.push(`${activityCount}次活动`);
+  }
 
   if (descParts.length > 0) {
     summaryText += ` (${descParts.join("，")})`;
@@ -87,16 +99,16 @@ export function showDetailPanel(locationGroup) {
 
       return `
       <div class="${itemClass} ${visitTypeClass}" data-event-index="${
-        event.index
-      }">
+  event.index
+}">
         <div class="event-header">
           <span class="visit-order-number">${orderNumber}</span>
           <span class="event-date-item">${event.date}</span>
           <span class="visit-order ${visitOrderClass}">${visitTypeLabel}</span>
         </div>
         <div class="event-description">${
-          event.originalEvent || event.event
-        }</div>
+  event.originalEvent || event.event
+}</div>
         ${event.age ? `<div class="event-age">年龄: ${event.age}岁</div>` : ""}
       </div>
     `;
@@ -129,14 +141,14 @@ export function showDetailPanel(locationGroup) {
       }, 300);
     });
 
-    item.addEventListener("mouseenter", (e) => {
+    item.addEventListener("mouseenter", (_e) => {
       if (state.currentHighlightedEventIndex !== eventIndex) {
         item.style.cursor = "pointer";
         item.style.transform = "translateX(2px)";
       }
     });
 
-    item.addEventListener("mouseleave", (e) => {
+    item.addEventListener("mouseleave", (_e) => {
       item.style.transform = "";
     });
   });
@@ -225,7 +237,9 @@ export function initStatsHover() {
   const statsPanel = document.getElementById("stats-panel");
   const hoverArea = document.getElementById("stats-hover-area");
 
-  if (!statsPanel || !hoverArea || isMobileDevice()) return;
+  if (!statsPanel || !hoverArea || isMobileDevice()) {
+    return;
+  }
 
   function showStatsPanel() {
     if (state.statsHoverTimeout) {
@@ -251,13 +265,17 @@ export function initStatsHover() {
  * 初始化详细面板拖拽关闭功能（移动端）
  */
 function initPanelDragClose() {
-  if (!isMobileDevice()) return;
+  if (!isMobileDevice()) {
+    return;
+  }
 
   const panel = document.getElementById("location-detail-panel");
   const panelHeader = panel?.querySelector(".panel-header");
   const backdrop = document.getElementById("panel-backdrop");
 
-  if (!panel || !panelHeader) return;
+  if (!panel || !panelHeader) {
+    return;
+  }
 
   let touchState = {
     startY: 0,
@@ -406,7 +424,7 @@ function initPanelDragClose() {
     e.preventDefault();
   }
 
-  function handleTouchEnd(e) {
+  function handleTouchEnd(_e) {
     if (!touchState.isDragging) {
       return;
     }
@@ -436,7 +454,7 @@ function initPanelDragClose() {
     }
   }
 
-  function handleTouchCancel(e) {
+  function handleTouchCancel(_e) {
     if (touchState.isDragging && !touchState.isProcessing) {
       resetAllStates();
     }

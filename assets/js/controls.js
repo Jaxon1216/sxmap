@@ -2,18 +2,20 @@
  * 播放控制和键盘控制模块
  */
 
-import { state } from './state.js';
-import { showEventAtIndex } from './paths.js';
-import { showPoetryMessage } from './poetry.js';
-import { SPEED_LABELS } from './config.js';
-import { showTemporaryMessage, fallbackCopyToClipboard } from './utils.js';
+import { state } from "./state.js";
+import { showEventAtIndex } from "./paths.js";
+import { showPoetryMessage } from "./poetry.js";
+import { SPEED_LABELS } from "./config.js";
+import { showTemporaryMessage, fallbackCopyToClipboard } from "./utils.js";
 
 /**
  * 切换播放/暂停状态
  */
 export function togglePlay() {
   const btn = document.getElementById("play-btn");
-  if (!btn) return;
+  if (!btn) {
+    return;
+  }
 
   if (state.isPlaying) {
     state.isPlaying = false;
@@ -81,7 +83,9 @@ export function previousEvent() {
  * 统一的键盘事件处理函数
  */
 export function handleTimelineKeydown(e) {
-  if (!state.trajectoryData || !state.trajectoryData.events) return;
+  if (!state.trajectoryData || !state.trajectoryData.events) {
+    return;
+  }
 
   let newIndex = state.currentEventIndex;
   let handled = false;

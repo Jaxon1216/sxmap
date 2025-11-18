@@ -2,8 +2,8 @@
  * 诗句动画模块
  */
 
-import { state } from './state.js';
-import { POETRY_TEXTS } from './config.js';
+import { state } from "./state.js";
+import { POETRY_TEXTS } from "./config.js";
 
 /**
  * 显示诗句动画消息（带状态控制）

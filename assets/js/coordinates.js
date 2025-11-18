@@ -2,15 +2,17 @@
  * 坐标处理和匹配模块
  */
 
-import { state } from './state.js';
+import { state } from "./state.js";
 
 /**
  * 构建完整的行政区划路径
  */
 export function buildFullLocationPath(locationInfo) {
-  if (!locationInfo) return null;
+  if (!locationInfo) {
+    return null;
+  }
 
-  let parts = [];
+  const parts = [];
 
   if (locationInfo.country && locationInfo.country !== "中国") {
     parts.push(locationInfo.country);
@@ -37,7 +39,9 @@ export function buildFullLocationPath(locationInfo) {
  * 根据位置信息获取坐标
  */
 export function getCoordinates(locationInfo) {
-  if (!locationInfo) return null;
+  if (!locationInfo) {
+    return null;
+  }
 
   if (locationInfo.coordinates) {
     return locationInfo.coordinates;
@@ -56,15 +60,21 @@ export function getCoordinates(locationInfo) {
  * 格式化地点名称显示
  */
 export function formatLocationName(locationInfo) {
-  if (!locationInfo) return "未知地点";
+  if (!locationInfo) {
+    return "未知地点";
+  }
 
-  let parts = [];
+  const parts = [];
 
   if (locationInfo.country && locationInfo.country !== "中国") {
     parts.push(locationInfo.country);
-    if (locationInfo.city) parts.push(locationInfo.city);
+    if (locationInfo.city) {
+      parts.push(locationInfo.city);
+    }
   } else {
-    if (locationInfo.province) parts.push(locationInfo.province);
+    if (locationInfo.province) {
+      parts.push(locationInfo.province);
+    }
     if (locationInfo.city && locationInfo.city !== locationInfo.province) {
       parts.push(locationInfo.city);
     }
@@ -80,7 +90,9 @@ export function formatLocationName(locationInfo) {
  * 获取坐标和格式化地点名称
  */
 export function getCoordinatesWithLocation(locationInfo) {
-  if (!locationInfo) return { coordinates: null, location: "未知地点" };
+  if (!locationInfo) {
+    return { coordinates: null, location: "未知地点" };
+  }
 
   if (locationInfo.coordinates) {
     return {

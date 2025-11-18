@@ -2,7 +2,7 @@
  * UI更新模块
  */
 
-import { state } from './state.js';
+import { state } from "./state.js";
 
 /**
  * 更新当前事件信息显示
@@ -80,7 +80,9 @@ export function updateProgress() {
  * 更新统计数据
  */
 export function updateStatistics() {
-  if (!state.trajectoryData || !state.trajectoryData.events) return;
+  if (!state.trajectoryData || !state.trajectoryData.events) {
+    return;
+  }
 
   const events = state.trajectoryData.events;
   const movementEvents = events.filter(

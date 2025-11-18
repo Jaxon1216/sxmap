@@ -2,11 +2,11 @@
  * 标记创建和管理模块
  */
 
-import { state } from './state.js';
-import { isMobileDevice } from './utils.js';
-import { getCoordinates, getCoordinatesWithLocation } from './coordinates.js';
-import { showDetailPanel } from './panels.js';
-import { ensureMarkersInteractivity } from './map.js';
+import { state } from "./state.js";
+import { isMobileDevice } from "./utils.js";
+import { getCoordinatesWithLocation } from "./coordinates.js";
+import { showDetailPanel } from "./panels.js";
+import { ensureMarkersInteractivity } from "./map.js";
 
 /**
  * 按地理位置聚合事件
@@ -167,9 +167,15 @@ export function groupEventsByLocation(events, maxIndex) {
  * 根据访问次数获取标记样式类
  */
 function getVisitCountClass(visitCount) {
-  if (visitCount === 1) return "visits-1";
-  if (visitCount === 2) return "visits-2";
-  if (visitCount === 3) return "visits-3";
+  if (visitCount === 1) {
+    return "visits-1";
+  }
+  if (visitCount === 2) {
+    return "visits-2";
+  }
+  if (visitCount === 3) {
+    return "visits-3";
+  }
   return "visits-4-plus";
 }
 
@@ -177,17 +183,29 @@ function getVisitCountClass(visitCount) {
  * 根据事件类型获取主要标记类型
  */
 function getPrimaryMarkerType(types) {
-  if (types.has("出生")) return "marker-birth";
-  if (types.has("国际移动")) return "marker-international";
-  if (types.has("长途移动")) return "marker-long-distance";
-  if (types.has("短途移动")) return "marker-short-distance";
+  if (types.has("出生")) {
+    return "marker-birth";
+  }
+  if (types.has("国际移动")) {
+    return "marker-international";
+  }
+  if (types.has("长途移动")) {
+    return "marker-long-distance";
+  }
+  if (types.has("短途移动")) {
+    return "marker-short-distance";
+  }
 
   const movementTypes = ["国际移动", "长途移动", "短途移动"].filter((type) =>
     types.has(type)
   );
-  if (movementTypes.length > 1) return "marker-mixed";
+  if (movementTypes.length > 1) {
+    return "marker-mixed";
+  }
 
-  if (types.has("原地活动")) return "marker-activity";
+  if (types.has("原地活动")) {
+    return "marker-activity";
+  }
 
   return "marker-movement";
 }
@@ -210,8 +228,12 @@ export function createLocationMarker(
     getVisitCountClass(visitCount),
   ];
 
-  if (isCurrent) markerClasses.push("current");
-  if (isVisited) markerClasses.push("visited");
+  if (isCurrent) {
+    markerClasses.push("current");
+  }
+  if (isVisited) {
+    markerClasses.push("visited");
+  }
 
   const markerContent = visitCount > 1 ? visitCount.toString() : "";
 
@@ -272,12 +294,22 @@ export function createLocationMarker(
     const activityCount = events.filter((e) => e.visitType === "活动").length;
     const birthCount = events.filter((e) => e.visitType === "出生").length;
 
-    let descParts = [];
-    if (birthCount > 0) descParts.push(`${birthCount}次出生`);
-    if (destCount > 0) descParts.push(`${destCount}次到达`);
-    if (startCount > 0) descParts.push(`${startCount}次出发`);
-    if (transitCount > 0) descParts.push(`${transitCount}次途径`);
-    if (activityCount > 0) descParts.push(`${activityCount}次活动`);
+    const descParts = [];
+    if (birthCount > 0) {
+      descParts.push(`${birthCount}次出生`);
+    }
+    if (destCount > 0) {
+      descParts.push(`${destCount}次到达`);
+    }
+    if (startCount > 0) {
+      descParts.push(`${startCount}次出发`);
+    }
+    if (transitCount > 0) {
+      descParts.push(`${transitCount}次途径`);
+    }
+    if (activityCount > 0) {
+      descParts.push(`${activityCount}次活动`);
+    }
 
     tooltipText = `${location} (${descParts.join("，")})`;
   }

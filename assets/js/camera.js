@@ -2,14 +2,16 @@
  * 镜头控制模块
  */
 
-import { state } from './state.js';
-import { calculatePathBounds } from './map.js';
+import { state } from "./state.js";
+import { calculatePathBounds } from "./map.js";
 
 /**
  * 处理镜头跟随逻辑
  */
 export function handleCameraFollow(currentEvent, previousIndex, animated = true) {
-  if (!currentEvent) return;
+  if (!currentEvent) {
+    return;
+  }
 
   const bounds = calculatePathBounds(currentEvent, previousIndex);
   if (bounds && bounds.isValid()) {

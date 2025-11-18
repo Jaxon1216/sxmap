@@ -2,7 +2,7 @@
  * 全局状态管理
  */
 
-import { DEFAULT_ANIMATION_CONFIG } from './config.js';
+import { DEFAULT_ANIMATION_CONFIG } from "./config.js";
 
 // ==================== 全局状态变量 ====================
 export const state = {
@@ -10,16 +10,16 @@ export const state = {
   map: null,
   regionsData: null,
   trajectoryData: null,
-  
+
   // 事件索引
   currentEventIndex: 0,
   previousEventIndex: 0,
-  
+
   // 播放控制
   isPlaying: false,
   playInterval: null,
   currentPlaySpeed: 1000,
-  
+
   // 标记和路径
   eventMarkers: [],
   pathLayers: [],
@@ -27,14 +27,14 @@ export const state = {
   locationGroups: new Map(),
   locationMarkers: new Map(),
   motionPaths: new Map(),
-  
+
   // UI状态
   statsHoverTimeout: null,
   isPanelVisible: true,
   isFeedbackModalVisible: false,
   isCameraFollowEnabled: true,
   isDragging: false,
-  
+
   // 动画状态
   isPoetryAnimationPlaying: false,
   poetryAnimationTimeout: null,
@@ -43,12 +43,12 @@ export const state = {
   currentHighlightedEventIndex: -1,
   animationQueue: [],
   isAnimationInProgress: false,
-  
+
   // 音频状态
   audioLoadingPromise: null,
   isAutoPlayPending: false,
   currentAudioEventListeners: new Set(),
-  
+
   // 动画配置
   animationConfig: { ...DEFAULT_ANIMATION_CONFIG },
 };
