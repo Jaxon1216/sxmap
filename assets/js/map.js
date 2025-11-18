@@ -20,8 +20,19 @@ export function initMap() {
     tapTolerance: 15,
   });
 
+  // 高德卫星影像图层
   L.tileLayer(
-    "https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",
+    "https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",
+    {
+      subdomains: "1234",
+      attribution: "© 高德地图",
+      maxZoom: 18,
+    }
+  ).addTo(state.map);
+
+  // 高德卫星影像标注图层（路网、地名等）
+  L.tileLayer(
+    "https://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
     {
       subdomains: "1234",
       attribution: "© 高德地图",

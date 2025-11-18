@@ -49,7 +49,6 @@ export function renderEventsList() {
 
   // 生成事件列表HTML
   const eventsHtml = events.map((event, index) => {
-    const isFirst = index === 0;
     const isCurrent = index === state.currentEventIndex;
 
     return `
