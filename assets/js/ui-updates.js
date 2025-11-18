@@ -75,7 +75,7 @@ export function updateProgress() {
   if (slider && !slider.matches(":active")) {
     slider.value = state.currentEventIndex;
   }
-  
+
   // 更新右侧面板事件列表高亮
   updateEventsListHighlight();
 }

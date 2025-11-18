@@ -231,37 +231,6 @@ export function initDetailPanel() {
 }
 
 /**
- * 初始化PC端统计面板悬停交互
- */
-export function initStatsHover() {
-  const statsPanel = document.getElementById("stats-panel");
-  const hoverArea = document.getElementById("stats-hover-area");
-
-  if (!statsPanel || !hoverArea || isMobileDevice()) {
-    return;
-  }
-
-  function showStatsPanel() {
-    if (state.statsHoverTimeout) {
-      clearTimeout(state.statsHoverTimeout);
-      state.statsHoverTimeout = null;
-    }
-    statsPanel.classList.add("visible");
-  }
-
-  function hideStatsPanel() {
-    state.statsHoverTimeout = setTimeout(() => {
-      statsPanel.classList.remove("visible");
-    }, 150);
-  }
-
-  hoverArea.addEventListener("mouseenter", showStatsPanel);
-  hoverArea.addEventListener("mouseleave", hideStatsPanel);
-  statsPanel.addEventListener("mouseenter", showStatsPanel);
-  statsPanel.addEventListener("mouseleave", hideStatsPanel);
-}
-
-/**
  * 初始化详细面板拖拽关闭功能（移动端）
  */
 function initPanelDragClose() {

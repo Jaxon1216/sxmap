@@ -7,7 +7,7 @@ import { isMobileDevice } from "./utils.js";
 import { togglePlay, previousEvent, nextEvent, handleTimelineKeydown, copyCurrentEventData } from "./controls.js";
 import { showEventAtIndex } from "./paths.js";
 import { initAnimationControls, initCustomSpeedSelect } from "./animations.js";
-import { initStatsHover, initDetailPanel } from "./panels.js";
+import { initDetailPanel } from "./panels.js";
 import { initMobileInteractions } from "./mobile.js";
 import { initCameraFollowControl } from "./camera.js";
 
@@ -139,7 +139,6 @@ export function bindEvents() {
   });
 
   initAnimationControls();
-  initStatsHover();
   initDetailPanel();
   initMobileInteractions();
   initCameraFollowControl();

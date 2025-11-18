@@ -354,50 +354,6 @@ body {
     opacity: 0;
 }
 
-/* PC端统计面板（旧版，已隐藏） */
-#stats-panel {
-    position: absolute;
-    top: 100px;
-    left: -300px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 15px 20px;
-    border-radius: 0 12px 12px 0;
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
-    font-size: 13px;
-    z-index: 1000;
-    min-width: 240px;
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: none;
-}
-
-#stats-panel.visible {
-    left: 15px;
-}
-
-/* 统计面板悬停触发按钮 */
-#stats-panel::before {
-    content: "📊";
-    position: absolute;
-    right: -30px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 0 8px 8px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: none;
-    cursor: pointer;
-}
-
 #stats-hover-area {
     position: absolute;
     top: 0;

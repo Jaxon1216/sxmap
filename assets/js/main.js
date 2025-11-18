@@ -72,11 +72,11 @@ async function initApp() {
       });
 
       updateStatistics();
-      
+
       // 初始化右侧面板
       initRightPanel();
       initPanelAfterDataLoad();
-      
+
       showEventAtIndex(0, false);
 
       setTimeout(() => {
