@@ -69,6 +69,22 @@ export function renderEventsList() {
   eventItems.forEach((item) => {
     item.addEventListener("click", () => {
       const eventIndex = parseInt(item.dataset.eventIndex);
+      
+      // 如果正在播放，先停止播放
+      if (state.isPlaying) {
+        state.isPlaying = false;
+        if (state.playInterval) {
+          clearTimeout(state.playInterval);
+          state.playInterval = null;
+        }
+        const playBtn = document.getElementById("play-btn");
+        if (playBtn) {
+          playBtn.textContent = "▶";
+          playBtn.title = "播放";
+        }
+      }
+      
+      // 跳转到选中的事件（如果不是当前事件）
       if (eventIndex !== state.currentEventIndex) {
         showEventAtIndex(eventIndex, false);
       }
