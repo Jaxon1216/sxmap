@@ -692,65 +692,6 @@ function hideDetailPanel() {
   }
 }
 
-// ==================== 反馈功能控制 ====================
-/**
- * 初始化反馈功能
- */
-function initFeedbackModal() {
-  const feedbackBtn = document.getElementById("feedback-btn");
-  const feedbackModal = document.getElementById("feedback-modal");
-  const feedbackBackdrop = document.getElementById("feedback-backdrop");
-  const feedbackClose = document.getElementById("feedback-modal-close");
-
-  if (feedbackBtn) {
-    feedbackBtn.addEventListener("click", showFeedbackModal);
-  }
-
-  if (feedbackClose) {
-    feedbackClose.addEventListener("click", hideFeedbackModal);
-  }
-
-  if (feedbackBackdrop) {
-    feedbackBackdrop.addEventListener("click", hideFeedbackModal);
-  }
-
-  if (feedbackModal) {
-    feedbackModal.addEventListener("click", (e) => {
-      e.stopPropagation();
-    });
-  }
-
-  const issuesItem = document.getElementById("feedback-issues");
-  const projectItem = document.getElementById("feedback-project");
-  const wechatItem = document.getElementById("feedback-wechat");
-
-  if (issuesItem) {
-    issuesItem.addEventListener("click", () => {
-      openGitHubIssues();
-      hideFeedbackModal();
-    });
-  }
-
-  if (projectItem) {
-    projectItem.addEventListener("click", () => {
-      openGitHubProject();
-      hideFeedbackModal();
-    });
-  }
-
-  if (wechatItem) {
-    wechatItem.addEventListener("click", () => {
-      handleWeChatAction();
-    });
-  }
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && isFeedbackModalVisible) {
-      hideFeedbackModal();
-    }
-  });
-}
-
 /**
  * 显示反馈弹窗
  */
@@ -3930,7 +3871,6 @@ function bindEvents() {
   initStatsHover();
   initDetailPanel();
   initMobileInteractions();
-  initFeedbackModal();
   initCameraFollowControl();
   initMusicPlayer();
 
