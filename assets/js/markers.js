@@ -216,7 +216,8 @@ function getPrimaryMarkerType(types) {
 export function createLocationMarker(
   locationGroup,
   isCurrent = false,
-  isVisited = false
+  isVisited = false,
+  currentEvent = null
 ) {
   const { coordinates, location, events, types } = locationGroup;
   const [lng, lat] = coordinates;
@@ -281,44 +282,31 @@ export function createLocationMarker(
     }, 50);
   });
 
-  let tooltipText;
-  if (visitCount === 1) {
-    const event = events[0];
-    tooltipText = `${event.date} - ${event.visitType === "途径" ? "途经" : ""}${
-      event.originalEvent || event.event
-    }`;
-  } else {
-    const transitCount = events.filter((e) => e.visitType === "途径").length;
-    const destCount = events.filter((e) => e.visitType === "目的地").length;
-    const startCount = events.filter((e) => e.visitType === "起点").length;
-    const activityCount = events.filter((e) => e.visitType === "活动").length;
-    const birthCount = events.filter((e) => e.visitType === "出生").length;
+  // 如果是当前高亮的点，显示 popup
+  if (isCurrent && currentEvent) {
+    const popupContent = `
+      <div style="font-family: sans-serif;">
+        <div style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">${currentEvent.date}</div>
+        <div style="font-size: 13px; color: #666; margin-bottom: 4px;">${location}</div>
+        <div style="font-size: 13px;">${currentEvent.event}</div>
+      </div>
+    `;
 
-    const descParts = [];
-    if (birthCount > 0) {
-      descParts.push(`${birthCount}次出生`);
-    }
-    if (destCount > 0) {
-      descParts.push(`${destCount}次到达`);
-    }
-    if (startCount > 0) {
-      descParts.push(`${startCount}次出发`);
-    }
-    if (transitCount > 0) {
-      descParts.push(`${transitCount}次途径`);
-    }
-    if (activityCount > 0) {
-      descParts.push(`${activityCount}次活动`);
-    }
+    marker.bindPopup(popupContent, {
+      className: "current-event-popup",
+      closeButton: false,
+      autoClose: false,
+      closeOnClick: false,
+      offset: [0, -10],
+    });
 
-    tooltipText = `${location} (${descParts.join("，")})`;
+    // 在标记添加到地图后打开 popup
+    marker.on("add", function () {
+      setTimeout(() => {
+        marker.openPopup();
+      }, 100);
+    });
   }
-
-  marker.bindTooltip(tooltipText, {
-    direction: "top",
-    offset: [0, -15],
-    className: "simple-tooltip",
-  });
 
   return marker;
 }
@@ -342,7 +330,12 @@ export function updateEventMarkers(targetIndex) {
     const isCurrent = coordKey === currentCoordKey;
     const isVisited = !isCurrent;
 
-    const marker = createLocationMarker(locationGroup, isCurrent, isVisited);
+    const marker = createLocationMarker(
+      locationGroup,
+      isCurrent,
+      isVisited,
+      isCurrent ? currentEvent : null
+    );
 
     if (marker) {
       marker.addTo(state.map);
