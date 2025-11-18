@@ -92,9 +92,6 @@
         ⚙
       </button>
 
-      <!-- 音乐播放按钮 -->
-      <button id="music-btn" class="music-btn" title="背景音乐">🎵</button>
-
       <!-- 时间轴控制 -->
       <div id="timeline-control">
         <!-- 当前事件信息（移动端） -->
@@ -212,15 +209,15 @@
               <div
                 class="custom-select"
                 id="custom-speed-select"
-                data-value="1000"
+                data-value="500"
               >
                 <div class="select-display">
                   <span class="select-text">正常</span>
                   <span class="select-arrow">▼</span>
                 </div>
                 <div class="select-dropdown">
-                  <div class="select-option" data-value="500">很快</div>
-                  <div class="select-option selected" data-value="1000">
+                  <div class="select-option selected" data-value="500">很快</div>
+                  <div class="select-option" data-value="1000">
                     正常
                   </div>
                   <div class="select-option" data-value="2000">较慢</div>
@@ -228,144 +225,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 音乐播放弹窗背景遮罩 -->
-      <div id="music-backdrop" class="music-backdrop"></div>
-
-      <!-- 音乐播放弹窗 -->
-      <div id="music-modal" class="music-modal">
-        <div class="music-modal-header">
-          <h3>🎵 背景音乐</h3>
-          <button class="music-modal-close" id="music-modal-close" title="关闭">
-            ×
-          </button>
-        </div>
-        <div class="music-modal-content">
-          <!-- 当前播放歌曲信息 -->
-          <div class="current-song-info">
-            <div class="song-title" id="current-song-title">请选择歌曲</div>
-            <div class="song-artist" id="current-song-artist">-</div>
-          </div>
-
-          <!-- 音乐播放控制 -->
-          <div class="music-controls">
-            <button
-              class="music-control-btn"
-              id="music-prev-btn"
-              title="上一首"
-            >
-              ⏮
-            </button>
-            <button
-              class="music-control-btn music-play-btn"
-              id="music-play-btn"
-              title="播放"
-            >
-              ▶
-            </button>
-            <button
-              class="music-control-btn"
-              id="music-next-btn"
-              title="下一首"
-            >
-              ⏭
-            </button>
-          </div>
-
-          <!-- 音乐进度条 -->
-          <div class="music-progress-container">
-            <div class="music-progress-bar">
-              <div class="music-progress-fill" id="music-progress-fill"></div>
-            </div>
-            <div class="music-time-info">
-              <span id="music-current-time">00:00</span>
-              <span id="music-total-time">00:00</span>
-            </div>
-          </div>
-
-          <!-- 音量控制 -->
-          <div class="music-volume-control">
-            <span class="volume-icon">🔊</span>
-            <input
-              type="range"
-              id="music-volume-slider"
-              min="0"
-              max="100"
-              value="50"
-              class="volume-slider"
-            />
-            <span class="volume-value" id="music-volume-value">50%</span>
-          </div>
-
-          <!-- 歌曲列表 -->
-          <div class="music-playlist">
-            <h4>播放列表</h4>
-            <div class="playlist-items" id="music-playlist-items"></div>
-          </div>
-
-          <!-- 本地音乐上传 -->
-          <div class="music-upload-section">
-            <h4>本地音乐</h4>
-            <div class="upload-area">
-              <input
-                type="file"
-                id="music-file-input"
-                accept="audio/*"
-                style="display: none"
-              />
-              <button class="upload-btn" id="music-upload-btn">
-                📁 选择本地音乐文件
-              </button>
-              <p class="upload-hint">支持 MP3, WAV, OGG 格式</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 反馈弹窗背景遮罩 -->
-      <div id="feedback-backdrop" class="feedback-backdrop"></div>
-
-      <!-- 反馈弹窗 -->
-      <div id="feedback-modal" class="feedback-modal">
-        <div class="feedback-modal-header">
-          <h3>💬 意见反馈</h3>
-          <button
-            class="feedback-modal-close"
-            id="feedback-modal-close"
-            title="关闭"
-          >
-            ×
-          </button>
-        </div>
-        <div class="feedback-modal-content">
-          <div class="feedback-item" id="feedback-issues">
-            <div class="feedback-icon">🛠️</div>
-            <div class="feedback-info">
-              <div class="feedback-title">问题反馈</div>
-              <div class="feedback-desc">发现bug或建议改进</div>
-            </div>
-            <div class="feedback-arrow">→</div>
-          </div>
-
-          <div class="feedback-item" id="feedback-project">
-            <div class="feedback-icon">⭐</div>
-            <div class="feedback-info">
-              <div class="feedback-title">项目主页</div>
-              <div class="feedback-desc">查看源码和文档</div>
-            </div>
-            <div class="feedback-arrow">→</div>
-          </div>
-
-          <div class="feedback-item" id="feedback-wechat">
-            <div class="feedback-icon">📱</div>
-            <div class="feedback-info">
-              <div class="feedback-title">关注公众号</div>
-              <div class="feedback-desc">硅基茶水间 - 交流讨论</div>
-            </div>
-            <div class="feedback-arrow">→</div>
           </div>
         </div>
       </div>
@@ -396,9 +255,6 @@
         <div class="loading-text">正在加载轨迹数据...</div>
       </div>
     </div>
-
-    <!-- 音频元素 -->
-    <audio id="music-audio" preload="none"></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/Igor-Vladyka/leaflet.motion/dist/leaflet.motion.min.js"></script>
