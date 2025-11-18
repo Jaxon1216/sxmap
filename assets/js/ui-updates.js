@@ -3,6 +3,7 @@
  */
 
 import { state } from "./state.js";
+import { updateEventsListHighlight } from "./right-panel.js";
 
 /**
  * 更新当前事件信息显示
@@ -74,6 +75,9 @@ export function updateProgress() {
   if (slider && !slider.matches(":active")) {
     slider.value = state.currentEventIndex;
   }
+  
+  // 更新右侧面板事件列表高亮
+  updateEventsListHighlight();
 }
 
 /**

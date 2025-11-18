@@ -12,14 +12,101 @@
   </head>
   <body>
     <div id="container">
-      <!-- 地图容器 -->
+      <!-- 左侧地图容器 -->
       <div id="map" class="panel-visible"></div>
 
-      <!-- 悬停检测区域（PC端） -->
-      <div id="stats-hover-area"></div>
+      <!-- 右侧控制面板 -->
+      <div id="right-control-panel">
+        <!-- 第一行：播放控制按钮 -->
+        <div class="control-section player-buttons-section">
+          <button class="player-btn" id="prev-btn" title="上一个事件">
+            ⏮
+          </button>
+          <button class="player-btn" id="play-btn" title="播放">▶</button>
+          <button class="player-btn" id="next-btn" title="下一个事件">
+            ⏭
+          </button>
+        </div>
 
-      <!-- 统计面板（PC端） -->
-      <div id="stats-panel">
+        <!-- 第二行：基础信息和速度控制 -->
+        <div class="control-section info-section">
+          <div class="timeline-info-vertical">
+            <div class="time-point-vertical start">
+              <span class="label">开始</span>
+              <span class="value">1893-12-26</span>
+            </div>
+            <div class="time-point-vertical end">
+              <span class="label">结束</span>
+              <span class="value">1976-09-09</span>
+            </div>
+          </div>
+          <div class="speed-control-section">
+            <label class="speed-label">播放速度:</label>
+            <div class="custom-select-wrapper">
+              <div
+                class="custom-select"
+                id="custom-speed-select"
+                data-value="500"
+              >
+                <div class="select-display">
+                  <span class="select-text">很快</span>
+                  <span class="select-arrow">▼</span>
+                </div>
+                <div class="select-dropdown">
+                  <div class="select-option selected" data-value="500">很快</div>
+                  <div class="select-option" data-value="1000">正常</div>
+                  <div class="select-option" data-value="2000">较慢</div>
+                  <div class="select-option" data-value="3000">很慢</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第三行：事件列表 -->
+        <div class="control-section events-list-section">
+          <h4 class="section-title">事件列表</h4>
+          <div id="events-list-container" class="events-list-container">
+            <div class="loading-events">正在加载事件列表...</div>
+          </div>
+        </div>
+
+        <!-- 统计信息（折叠在底部） -->
+        <div class="control-section stats-section collapsed">
+          <h4 class="section-title stats-toggle">
+            <span>📊 统计信息</span>
+            <span class="toggle-icon">▼</span>
+          </h4>
+          <div class="stats-content">
+            <div class="stats-item">
+              <span class="stats-label">总事件数:</span>
+              <span class="stats-value" id="total-events">-</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">移动次数:</span>
+              <span class="stats-value" id="movement-count">-</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">访问省市:</span>
+              <span class="stats-value" id="visited-places">-</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">国际移动:</span>
+              <span class="stats-value" id="international-count">-</span>
+            </div>
+            <div class="stats-item">
+              <span class="stats-label">时间跨度:</span>
+              <span class="stats-value" id="time-span">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 悬停检测区域（PC端） - 隐藏 -->
+      <div id="stats-hover-area" style="display: none;"></div>
+
+      <!-- 旧的统计面板（PC端） - 隐藏 -->
+      <div id="stats-panel" style="display: none;">
         <h4 style="margin-bottom: 12px; color: #2c3e50">轨迹统计</h4>
         <div class="stats-item">
           <span class="stats-label">总事件数:</span>
@@ -92,8 +179,8 @@
         ⚙
       </button>
 
-      <!-- 时间轴控制 -->
-      <div id="timeline-control">
+      <!-- 时间轴控制 - 移动端使用 -->
+      <div id="timeline-control" style="display: none;">
         <!-- 当前事件信息（移动端） -->
         <div class="current-event-section">
           <div class="event-info-row">

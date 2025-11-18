@@ -12,6 +12,7 @@ import { showEventAtIndex } from "./paths.js";
 import { updateStatistics } from "./ui-updates.js";
 import { bindEvents } from "./events.js";
 import { forceStopPoetryAnimation } from "./poetry.js";
+import { initRightPanel, initPanelAfterDataLoad } from "./right-panel.js";
 import {
   checkMotionPlugin,
   cleanupMotionResources,
@@ -71,6 +72,11 @@ async function initApp() {
       });
 
       updateStatistics();
+      
+      // 初始化右侧面板
+      initRightPanel();
+      initPanelAfterDataLoad();
+      
       showEventAtIndex(0, false);
 
       setTimeout(() => {

@@ -44,16 +44,317 @@ body {
     height: 100vh;
     position: relative;
     background: #ffffff;
+    display: flex;
 }
 
 #map {
-    width: 100%;
+    flex: 1;
     height: 100vh;
     background: #f0f0f0;
-    transition: height 0.3s ease;
+    transition: width 0.3s ease;
 }
 
-/* ==================== PC端统计面板 ==================== */
+/* ==================== 右侧控制面板 ==================== */
+#right-control-panel {
+    width: 380px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    border-left: 1px solid rgba(52, 152, 219, 0.2);
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 100;
+}
+
+.control-section {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(52, 152, 219, 0.1);
+}
+
+/* 第一行：播放控制按钮 */
+.player-buttons-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(52, 152, 219, 0.03);
+}
+
+.player-buttons-section .player-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    font-size: 18px;
+    touch-action: manipulation;
+}
+
+.player-buttons-section .player-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.player-buttons-section .player-btn:active {
+    transform: scale(0.95);
+}
+
+.player-buttons-section .player-btn:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 第二行：基础信息和速度控制 */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(52, 152, 219, 0.02);
+}
+
+.timeline-info-vertical {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.time-point-vertical {
+    flex: 1;
+    padding: 10px 12px;
+    background: rgba(52, 152, 219, 0.08);
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(52, 152, 219, 0.15);
+}
+
+.time-point-vertical .label {
+    display: block;
+    color: #7f8c8d;
+    font-size: 11px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+.time-point-vertical .value {
+    display: block;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.speed-control-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.speed-control-section .speed-label {
+    color: #2c3e50;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.speed-control-section .custom-select-wrapper {
+    flex: 1;
+}
+
+/* 第三行：事件列表 */
+.events-list-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 16px 0;
+    background: rgba(52, 152, 219, 0.01);
+}
+
+.section-title {
+    margin: 0 0 12px 20px;
+    color: #2c3e50;
+    font-size: 14px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.2);
+    margin-right: 20px;
+}
+
+.events-list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px;
+    scroll-behavior: smooth;
+}
+
+/* 自定义滚动条样式 */
+.events-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.events-list-container::-webkit-scrollbar-track {
+    background: rgba(52, 152, 219, 0.05);
+    border-radius: 3px;
+}
+
+.events-list-container::-webkit-scrollbar-thumb {
+    background: rgba(52, 152, 219, 0.3);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.events-list-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(52, 152, 219, 0.5);
+}
+
+.loading-events {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 40px 20px;
+    font-size: 13px;
+}
+
+.event-list-item {
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-left: 3px solid #3498db;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.6);
+    transition: all 0.25s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.event-list-item:hover {
+    background: rgba(52, 152, 219, 0.08);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.15);
+}
+
+.event-list-item.current {
+    background: rgba(52, 152, 219, 0.15);
+    border-left-color: #e74c3c;
+    box-shadow: 0 3px 12px rgba(52, 152, 219, 0.25);
+    transform: translateX(5px);
+}
+
+.event-list-item.current::after {
+    content: '▶';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e74c3c;
+    font-size: 12px;
+    animation: pulse-arrow 1.5s infinite;
+}
+
+@keyframes pulse-arrow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+.event-list-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 8px;
+}
+
+.event-list-date {
+    color: #3498db;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(52, 152, 219, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.event-list-location {
+    color: #7f8c8d;
+    font-size: 10px;
+    background: rgba(127, 140, 141, 0.1);
+    padding: 2px 5px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.event-list-title {
+    color: #2c3e50;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.event-list-item.current .event-list-title {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* 统计信息折叠区 */
+.stats-section {
+    border-top: 2px solid rgba(52, 152, 219, 0.2);
+    background: rgba(52, 152, 219, 0.02);
+}
+
+.stats-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    padding: 12px 20px;
+    border-bottom: none;
+    transition: all 0.2s ease;
+}
+
+.stats-toggle:hover {
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.toggle-icon {
+    font-size: 10px;
+    color: #7f8c8d;
+    transition: transform 0.3s ease;
+}
+
+.stats-section.collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+
+.stats-content {
+    max-height: 300px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.stats-section.collapsed .stats-content {
+    max-height: 0;
+    opacity: 0;
+}
+
+/* PC端统计面板（旧版，已隐藏） */
 #stats-panel {
     position: absolute;
     top: 100px;
@@ -150,6 +451,8 @@ body {
     border-radius: 3px;
     cursor: pointer;
     -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     margin: 0 8px;
 }
 
@@ -589,6 +892,7 @@ body {
     outline: none;
     cursor: pointer;
     -webkit-appearance: none;
+    -moz-appearance: none;
     appearance: none;
     transition: all 0.3s ease;
 }
