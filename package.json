@@ -1,0 +1,20 @@
+{
+  "name": "mao-map",
+  "version": "1.0.0",
+  "description": "毛泽东生平地理轨迹可视化",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint assets/js/**/*.js",
+    "lint:fix": "eslint assets/js/**/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sansan0/mao-map"
+  },
+  "author": "sansan0",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}
+
