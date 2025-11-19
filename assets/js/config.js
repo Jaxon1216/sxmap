@@ -4,25 +4,25 @@
 
 // ==================== 导航配置 ====================
 export const NAVIGATION_CONFIG = [
-  {
-    id: "mao",
-    name: "毛泽东",
-    dataFile: "data/mao_trajectory_events.json",
-    startDate: "1893-12-26",
-    endDate: "1976-09-09",
-    description: "毛泽东生平地理轨迹",
-    active: true, // 默认激活
-  },
-  // 后续可以添加更多导航项
   // {
-  //   id: "su_shi",
-  //   name: "苏轼",
-  //   dataFile: "data/su_shi_trajectory_events.json",
-  //   startDate: "1037-01-08",
-  //   endDate: "1101-08-24",
-  //   description: "苏轼生平地理轨迹",
-  //   active: false,
+  //   id: "mao",
+  //   name: "毛泽东",
+  //   dataFile: "data/mao_trajectory_events.json",
+  //   startDate: "1893-12-26",
+  //   endDate: "1976-09-09",
+  //   description: "毛泽东生平地理轨迹",
+  //   active: true, // 默认激活
   // },
+  // 后续可以添加更多导航项
+  {
+    id: "su_shi",
+    name: "苏轼被贬之路",
+    dataFile: "data/su_shi_trajectory_events.json",
+    startDate: "1036-01-01",
+    endDate: "1101-01-01",
+    description: "苏轼被贬之路",
+    active: true,
+  },
 ];
 
 // ==================== 全局常量 ====================
@@ -34,24 +34,19 @@ export const INTERNATIONAL_COORDINATES = {
 export const CAMERA_SPEED_LEVELS = [
   {
     name: "极快",
+    cameraFollowDuration: 300,
+    cameraPanDuration: 200,
+  },
+  {
+    name: "正常",
     cameraFollowDuration: 600,
     cameraPanDuration: 400,
   },
   {
-    name: "正常",
+    name: "慢速",
     cameraFollowDuration: 2000,
     cameraPanDuration: 1500,
-  },
-  {
-    name: "慢速",
-    cameraFollowDuration: 3500,
-    cameraPanDuration: 2800,
-  },
-  {
-    name: "极慢",
-    cameraFollowDuration: 5000,
-    cameraPanDuration: 4000,
-  },
+  }
 ];
 
 // 动画配置
