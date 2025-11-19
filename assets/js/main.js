@@ -9,7 +9,7 @@ import { isMobileDevice, hideLoading } from "./utils.js";
 import { initMap } from "./map.js";
 import { loadGeographicData, loadTrajectoryData } from "./data-loader.js";
 import { showEventAtIndex } from "./paths.js";
-import { updateStatistics } from "./ui-updates.js";
+import { updateStatistics, updateTimeRange } from "./ui-updates.js";
 import { bindEvents } from "./events.js";
 import { forceStopPoetryAnimation } from "./poetry.js";
 import { initRightPanel, initPanelAfterDataLoad } from "./right-panel.js";
@@ -74,6 +74,9 @@ async function reloadAppData(navConfig) {
 
     // 更新统计信息
     updateStatistics();
+
+    // 更新时间范围显示
+    updateTimeRange();
 
     // 重新初始化右侧面板
     initPanelAfterDataLoad();
@@ -154,6 +157,9 @@ async function initApp() {
       });
 
       updateStatistics();
+
+      // 更新时间范围显示
+      updateTimeRange();
 
       // 初始化右侧面板
       initRightPanel();

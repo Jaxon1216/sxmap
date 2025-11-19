@@ -81,6 +81,39 @@ export function updateProgress() {
 }
 
 /**
+ * 更新时间范围显示
+ */
+export function updateTimeRange() {
+  if (!state.trajectoryData || !state.trajectoryData.events || state.trajectoryData.events.length === 0) {
+    return;
+  }
+
+  const events = state.trajectoryData.events;
+  const startDate = events[0].date;
+  const endDate = events[events.length - 1].date;
+
+  // 更新右侧面板顶部的时间范围
+  const startTopEl = document.getElementById("time-range-start-top");
+  const endTopEl = document.getElementById("time-range-end-top");
+  if (startTopEl) {
+    startTopEl.textContent = startDate;
+  }
+  if (endTopEl) {
+    endTopEl.textContent = endDate;
+  }
+
+  // 更新移动端时间轴的时间范围
+  const startMobileEl = document.getElementById("time-range-start-mobile");
+  const endMobileEl = document.getElementById("time-range-end-mobile");
+  if (startMobileEl) {
+    startMobileEl.textContent = startDate;
+  }
+  if (endMobileEl) {
+    endMobileEl.textContent = endDate;
+  }
+}
+
+/**
  * 更新统计数据
  */
 export function updateStatistics() {

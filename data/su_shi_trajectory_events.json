@@ -1,63 +1,184 @@
 {
-  "title": "毛泽东生平地理轨迹（1893-1976年）",
+  "title": "苏轼生平地理轨迹（1036-1101年）",
   "events": [
     {
-      "date": "1893-12-26",
-      "age": 0,
-      "movementType": "出生",
-      "event": "毛泽东出生，字咏芝（后改润之），乳名\"石三伢子\"",
+      "date": "1080-01",
+      "age": 45,
+      "movementType": "长途移动",
+      "event": "任黄州团练副使。苏轼宿黄州禅智寺",
       "coordinates": {
         "start": null,
         "end": {
-          "province": "湖南省",
-          "city": "湘潭市",
-          "district": "韶山市"
+          "province": "湖北省",
+          "city": "黄冈市"
         }
       },
       "verification": ""
     },
     {
-      "date": "1902-03",
-      "age": 8,
-      "movementType": "原地活动",
-      "event": "从外祖父家回韶山入私塾发蒙，塾师邹春培",
+      "date": "1084",
+      "age": 49,
+      "movementType": "长途移动",
+      "event": "苏轼将至筠州，弟辙与洞山克文禅师、圣寿聪禅师来迎于建山寺",
       "coordinates": {
         "start": {
-          "province": "湖南省",
-          "city": "湘潭市",
-          "district": "韶山市"
+          "province": "湖北省",
+          "city": "黄冈市"
         },
         "end": {
-          "province": "湖南省",
-          "city": "湘潭市",
-          "district": "韶山市"
+          "province": "江西省",
+          "city": "宜春市",
+          "district": "高安市"
         }
       },
       "verification": ""
     },
     {
-      "date": "1903",
-      "age": 10,
+      "date": "1084",
+      "age": 49,
+      "movementType": "长途移动",
+      "event": "苏轼至常州",
+      "coordinates": {
+        "start": {
+          "province": "江西省",
+          "city": "宜春市",
+          "district": "高安市"
+        },
+        "end": {
+          "province": "江苏省",
+          "city": "常州市",
+          "district": "武进区"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1094-08-28",
+      "age": 59,
+      "movementType": "长途移动",
+      "event": "赴惠州途中。苏轼与虔州守黄元翁简。至虔州，登郁孤台，游廉泉、尘外亭，皆有诗。至是出陆《郁孤台 其一》",
+      "coordinates": {
+        "start": {
+          "province": "江苏省",
+          "city": "常州市",
+          "district": "武进区"
+        },
+        "end": {
+          "province": "江西省",
+          "city": "赣州市",
+          "district": "赣县区"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1094",
+      "age": 59,
       "movementType": "短途移动",
-      "event": "因逃学害怕父亲责打，往湘潭县城跑，三天后被找回",
+      "event": "苏轼道经南安，传于一寺壁作竹石",
       "coordinates": {
         "start": {
-          "province": "湖南省",
-          "city": "湘潭市",
-          "district": "韶山市"
+          "province": "江西省",
+          "city": "赣州市",
+          "district": "赣县区"
         },
         "end": {
-          "province": "湖南省",
-          "city": "湘潭市",
-          "district": "韶山市"
+          "province": "江西省",
+          "city": "赣州市",
+          "district": "大余县"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1094-09",
+      "age": 59,
+      "movementType": "长途移动",
+      "event": "赴惠州途中。过大庾岭，苏轼题诗龙泉钟上",
+      "coordinates": {
+        "start": {
+          "province": "江西省",
+          "city": "赣州市",
+          "district": "大余县"
         },
-        "transit": [
-          {
-            "province": "湖南省",
-            "city": "湘潭市",
-            "district": "湘潭县"
-          }
-        ]
+        "end": {
+          "province": "广东省",
+          "city": "韶关市",
+          "district": "南雄市"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1094-10-02",
+      "age": 59,
+      "movementType": "短途移动",
+      "event": "十月二日，苏轼到责授宁远军节度副使、惠州安置贬所，上谢表",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "韶关市",
+          "district": "南雄市"
+        },
+        "end": {
+          "province": "广东省",
+          "city": "惠州市"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1097",
+      "age": 62,
+      "movementType": "长途移动",
+      "event": "苏轼将至雷州境，雷守张逢以书通殷勤",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "惠州市"
+        },
+        "end": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "雷州市"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1097",
+      "age": 62,
+      "movementType": "短途移动",
+      "event": "苏轼至徐闻，得冯大钧之助，将渡海",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "雷州市"
+        },
+        "end": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "徐闻县"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1097-06",
+      "age": 62,
+      "movementType": "长途移动",
+      "event": "任琼州别驾。过儋耳山，苏轼作《儋耳山》诗。苏轼有《谪居三适三首》",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "徐闻县"
+        },
+        "end": {
+          "province": "海南省",
+          "city": "儋州市"
+        }
       },
       "verification": ""
     }
