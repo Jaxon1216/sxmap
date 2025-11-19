@@ -17,31 +17,19 @@
 
       <!-- 右侧控制面板 -->
       <div id="right-control-panel">
-        <!-- 第一行：播放控制按钮 -->
-        <div class="control-section player-buttons-section">
+        <!-- 第一行：播放控制按钮 + 播放速度 -->
+        <div class="control-section player-and-speed-section">
           <button class="player-btn" id="prev-btn" title="上一个事件">
-            ⏮
+            ⬅
           </button>
           <button class="player-btn" id="play-btn" title="播放">▶</button>
           <button class="player-btn" id="next-btn" title="下一个事件">
-            ⏭
+            ⮕
           </button>
-        </div>
-
-        <!-- 第二行：基础信息和速度控制 -->
-        <div class="control-section info-section">
-          <div class="timeline-info-vertical">
-            <div class="time-point-vertical start">
-              <span class="label">开始</span>
-              <span class="value">1893-12-26</span>
-            </div>
-            <div class="time-point-vertical end">
-              <span class="label">结束</span>
-              <span class="value">1976-09-09</span>
-            </div>
-          </div>
-          <div class="speed-control-section">
-            <label class="speed-label">播放速度:</label>
+          <div class="speed-divider"></div>
+          
+          <div class="speed-control-compact">
+            <span class="speed-label-compact">速度</span>
             <div class="custom-select-wrapper">
               <div
                 class="custom-select"
@@ -63,21 +51,40 @@
           </div>
         </div>
 
-        <!-- 第三行：事件列表 -->
+        <!-- 第二行：事件列表标题 + 时间范围 + 统计icon -->
+        <div class="control-section events-header-section">
+          <div class="events-header-left">
+            <h4 class="section-title-inline">事件列表</h4>
+            <div class="time-range-compact">
+              <span class="time-range-text">1893-12-26</span>
+              <span class="time-range-separator">~</span>
+              <span class="time-range-text">1976-09-09</span>
+            </div>
+          </div>
+          <button class="stats-icon-btn" id="stats-toggle-btn" title="统计信息">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3v18h18"/>
+              <path d="M18 17V9"/>
+              <path d="M13 17V5"/>
+              <path d="M8 17v-3"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 第三行：事件列表内容 -->
         <div class="control-section events-list-section">
-          <h4 class="section-title">事件列表</h4>
           <div id="events-list-container" class="events-list-container">
             <div class="loading-events">正在加载事件列表...</div>
           </div>
         </div>
 
-        <!-- 统计信息（折叠在底部） -->
-        <div class="control-section stats-section collapsed">
-          <h4 class="section-title stats-toggle">
-            <span>📊 统计信息</span>
-            <span class="toggle-icon">▼</span>
-          </h4>
-          <div class="stats-content">
+        <!-- 统计信息弹出层 -->
+        <div class="stats-popup" id="stats-popup">
+          <div class="stats-popup-header">
+            <h4>📊 统计信息</h4>
+            <button class="stats-popup-close" id="stats-popup-close">×</button>
+          </div>
+          <div class="stats-popup-content">
             <div class="stats-item">
               <span class="stats-label">总事件数:</span>
               <span class="stats-value" id="total-events">-</span>

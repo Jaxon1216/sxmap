@@ -9,8 +9,8 @@ import { showEventAtIndex } from "./paths.js";
  * 初始化右侧控制面板
  */
 export function initRightPanel() {
-  // 初始化统计信息折叠功能
-  initStatsToggle();
+  // 初始化统计信息弹出层功能
+  initStatsPopup();
 
   // 加载完数据后初始化事件列表
   if (state.trajectoryData && state.trajectoryData.events) {
@@ -19,16 +19,82 @@ export function initRightPanel() {
 }
 
 /**
- * 初始化统计信息折叠功能
+ * 初始化统计信息弹出层功能
  */
-function initStatsToggle() {
-  const statsToggle = document.querySelector(".stats-toggle");
-  const statsSection = document.querySelector(".stats-section");
+function initStatsPopup() {
+  const statsToggleBtn = document.getElementById("stats-toggle-btn");
+  const statsPopup = document.getElementById("stats-popup");
+  const statsPopupClose = document.getElementById("stats-popup-close");
 
-  if (statsToggle && statsSection) {
-    statsToggle.addEventListener("click", () => {
-      statsSection.classList.toggle("collapsed");
+  if (!statsToggleBtn || !statsPopup) {
+    return;
+  }
+
+  // 点击统计按钮切换弹出层显示状态
+  statsToggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isVisible = statsPopup.classList.contains("visible");
+
+    if (isVisible) {
+      hideStatsPopup();
+    } else {
+      showStatsPopup();
+    }
+  });
+
+  // 点击关闭按钮
+  if (statsPopupClose) {
+    statsPopupClose.addEventListener("click", (e) => {
+      e.stopPropagation();
+      hideStatsPopup();
     });
+  }
+
+  // 点击弹出层外部区域关闭
+  document.addEventListener("click", (e) => {
+    if (statsPopup.classList.contains("visible")) {
+      // 检查点击是否在弹出层内部
+      if (!statsPopup.contains(e.target) && !statsToggleBtn.contains(e.target)) {
+        hideStatsPopup();
+      }
+    }
+  });
+
+  // 阻止弹出层内部点击冒泡
+  statsPopup.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+}
+
+/**
+ * 显示统计信息弹出层
+ */
+function showStatsPopup() {
+  const statsPopup = document.getElementById("stats-popup");
+  const statsToggleBtn = document.getElementById("stats-toggle-btn");
+
+  if (statsPopup) {
+    statsPopup.classList.add("visible");
+  }
+
+  if (statsToggleBtn) {
+    statsToggleBtn.classList.add("active");
+  }
+}
+
+/**
+ * 隐藏统计信息弹出层
+ */
+function hideStatsPopup() {
+  const statsPopup = document.getElementById("stats-popup");
+  const statsToggleBtn = document.getElementById("stats-toggle-btn");
+
+  if (statsPopup) {
+    statsPopup.classList.remove("visible");
+  }
+
+  if (statsToggleBtn) {
+    statsToggleBtn.classList.remove("active");
   }
 }
 
