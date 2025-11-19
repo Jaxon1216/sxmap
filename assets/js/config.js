@@ -6,7 +6,7 @@
 export const NAVIGATION_CONFIG = [
   {
     id: "mao",
-    name: "毛泽东生平",
+    name: "毛泽东",
     dataFile: "data/mao_trajectory_events.json",
     startDate: "1893-12-26",
     endDate: "1976-09-09",
@@ -16,7 +16,7 @@ export const NAVIGATION_CONFIG = [
   // 后续可以添加更多导航项
   // {
   //   id: "su_shi",
-  //   name: "苏轼生平",
+  //   name: "苏轼",
   //   dataFile: "data/su_shi_trajectory_events.json",
   //   startDate: "1037-01-08",
   //   endDate: "1101-08-24",
