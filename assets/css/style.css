@@ -1367,9 +1367,9 @@ body {
 /* ==================== 详细信息面板 ==================== */
 .location-detail-panel {
     position: fixed;
-    top: 20px;
+    bottom: 20px;
     left: 20px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(52, 152, 219, 0.3);
     border-radius: 12px;
