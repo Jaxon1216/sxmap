@@ -18,10 +18,15 @@ export const NAVIGATION_CONFIG = [
     id: "su_shi",
     name: "苏轼被贬之路",
     dataFile: "data/su_shi_trajectory_events.json",
-    startDate: "1036-01-01",
-    endDate: "1101-01-01",
     description: "苏轼被贬之路",
     active: true,
+  },
+  {
+    id: "xu_xia_ke",
+    name: "徐霞客的苦难与辉煌之路",
+    dataFile: "data/xu_xia_ke_trajectory_events.json",
+    description: "徐霞客的苦难与辉煌之路",
+    active: false,
   },
 ];
 

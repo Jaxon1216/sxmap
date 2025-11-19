@@ -101,9 +101,6 @@ async function reloadDataForNav(navConfig) {
     // 更新页面标题
     document.title = `${navConfig.name} - 生平地理轨迹`;
 
-    // 更新时间范围显示
-    updateTimeRangeDisplay(navConfig.startDate, navConfig.endDate);
-
     // 触发自定义事件，通知其他模块数据需要重新加载
     const event = new CustomEvent("navigationChanged", {
       detail: {
@@ -117,25 +114,6 @@ async function reloadDataForNav(navConfig) {
     console.error("切换导航时出错:", error);
     alert(`切换失败: ${error.message}`);
     hideLoading();
-  }
-}
-
-/**
- * 更新时间范围显示
- */
-function updateTimeRangeDisplay(startDate, endDate) {
-  // 更新右侧控制面板的时间范围
-  const timeRangeTexts = document.querySelectorAll(".time-range-text");
-  if (timeRangeTexts.length >= 2) {
-    timeRangeTexts[0].textContent = startDate;
-    timeRangeTexts[1].textContent = endDate;
-  }
-
-  // 更新底部时间轴的时间范围（PC端）
-  const timePoints = document.querySelectorAll(".time-point .value");
-  if (timePoints.length >= 2) {
-    timePoints[0].textContent = startDate;
-    timePoints[1].textContent = endDate;
   }
 }
 

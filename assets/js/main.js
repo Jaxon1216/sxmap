@@ -40,16 +40,19 @@ async function reloadAppData(navConfig) {
   // 清理现有的地图图层和标记
   if (state.map) {
     state.map.eachLayer((layer) => {
-      if (layer !== state.baseLayers["标准地图"] &&
-          layer !== state.baseLayers["卫星地图"] &&
-          layer !== state.baseLayers["地形图"]) {
+      // 只保留底图瓦片图层，移除其他图层（标记、路径等）
+      if (!(layer instanceof L.TileLayer) && !(layer instanceof L.LayerGroup)) {
         state.map.removeLayer(layer);
       }
     });
   }
 
   // 清空状态
-  state.markers.clear();
+  state.eventMarkers = [];
+  state.pathLayers = [];
+  state.locationMarkers.clear();
+  state.locationGroups.clear();
+  state.motionPaths.clear();
   state.currentEventIndex = 0;
   state.currentMotionLayer = null;
 

@@ -1,0 +1,74 @@
+{
+  "title": "徐霞客的苦难与辉煌之路",
+  "events": [
+    {
+      "date": "1000-01-01",
+      "age": 45,
+      "movementType": "长途移动",
+      "event": "124345",
+      "coordinates": {
+        "start": null,
+        "end": {
+          "province": "湖南省",
+          "city": "怀化市"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1097",
+      "age": 62,
+      "movementType": "长途移动",
+      "event": "苏轼将至雷州境，雷守张逢以书通殷勤",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "惠州市"
+        },
+        "end": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "雷州市"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "1097",
+      "age": 62,
+      "movementType": "短途移动",
+      "event": "苏轼至徐闻，得冯大钧之助，将渡海",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "雷州市"
+        },
+        "end": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "徐闻县"
+        }
+      },
+      "verification": ""
+    },
+    {
+      "date": "2000-01-01",
+      "age": 62,
+      "movementType": "长途移动",
+      "event": "任琼州别驾。过儋耳山，苏轼作《儋耳山》诗。苏轼有《谪居三适三首》",
+      "coordinates": {
+        "start": {
+          "province": "广东省",
+          "city": "湛江市",
+          "district": "徐闻县"
+        },
+        "end": {
+          "province": "海南省",
+          "city": "儋州市"
+        }
+      },
+      "verification": ""
+    }
+  ]
+}
