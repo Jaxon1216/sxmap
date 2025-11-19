@@ -270,17 +270,19 @@ export function createLocationMarker(
 
   const markerContent = visitCount > 1 ? visitCount.toString() : "";
 
-  const baseSize = isMobileDevice() ? 2 : 0;
+  // 为适配 marker.green.png，放大标记尺寸，桌面端稍大一点，移动端略小
+  const baseSize = isMobileDevice() ? 28 : 32;
   const iconSizes = {
-    1: [14 + baseSize, 14 + baseSize],
-    2: [18 + baseSize, 18 + baseSize],
-    3: [22 + baseSize, 22 + baseSize],
-    4: [26 + baseSize, 26 + baseSize],
+    1: [baseSize, baseSize],
+    2: [baseSize + 6, baseSize + 6],
+    3: [baseSize + 12, baseSize + 12],
+    4: [baseSize + 18, baseSize + 18],
   };
 
-  const sizeKey = visitCount >= 4 ? 4 : visitCount;
+  const sizeKey = visitCount >= 4 ? 4 : visitCount || 1;
   const iconSize = iconSizes[sizeKey];
-  const iconAnchor = [iconSize[0] / 2, iconSize[1] / 2];
+  // 让图钉底部尖端落在坐标点附近，稍微下移 anchor
+  const iconAnchor = [iconSize[0] / 2, iconSize[1] * 0.85];
 
   const markerElement = L.divIcon({
     className: markerClasses.join(" "),
@@ -362,12 +364,17 @@ export function updateEventMarkers(targetIndex) {
   state.eventMarkers = [];
   state.locationMarkers.clear();
 
-  state.locationGroups = groupEventsByLocation(state.trajectoryData.events, targetIndex);
+  state.locationGroups = groupEventsByLocation(
+    state.trajectoryData.events,
+    targetIndex
+  );
 
   const currentEvent = state.trajectoryData.events[targetIndex];
   const currentCoordKey = currentEvent.endCoords
     ? `${currentEvent.endCoords[0]},${currentEvent.endCoords[1]}`
     : null;
+
+  let currentLatLng = null;
 
   state.locationGroups.forEach((locationGroup, coordKey) => {
     const isCurrent = coordKey === currentCoordKey;
@@ -384,11 +391,60 @@ export function updateEventMarkers(targetIndex) {
       marker.addTo(state.map);
       state.eventMarkers.push(marker);
       state.locationMarkers.set(coordKey, marker);
+
+      if (isCurrent) {
+        const [clng, clat] = locationGroup.coordinates;
+        currentLatLng = [clat, clng];
+      }
     }
   });
+
+  // 更新当前事件的呼吸灯高亮标记
+  updateHighlightMarker(currentLatLng);
 
   setTimeout(() => {
     ensureMarkersInteractivity();
   }, 100);
+}
+
+// ==================== 呼吸灯高亮标记 ====================
+
+let highlightMarker = null;
+
+function updateHighlightMarker(latLng) {
+  if (!state.map) return;
+
+  // 没有当前位置时隐藏高亮
+  if (!latLng) {
+    if (highlightMarker) {
+      state.map.removeLayer(highlightMarker);
+      highlightMarker = null;
+    }
+    return;
+  }
+
+  if (!highlightMarker) {
+    const icon = L.divIcon({
+      className: "breath-highlight-icon",
+      iconSize: [80, 80],
+      iconAnchor: [40, 40],
+    });
+
+    highlightMarker = L.marker(latLng, {
+      icon,
+      interactive: false,
+      keyboard: false,
+      // 提高 zIndexOffset，确保呼吸灯在普通标记之上
+      zIndexOffset: 1500,
+    });
+
+    highlightMarker.addTo(state.map);
+  } else {
+    highlightMarker.setLatLng(latLng);
+    // 如果由于地图图层清理被移除了，需要重新添加到地图上
+    if (!state.map.hasLayer(highlightMarker)) {
+      highlightMarker.addTo(state.map);
+    }
+  }
 }
 

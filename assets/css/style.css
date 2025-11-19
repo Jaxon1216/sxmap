@@ -1668,9 +1668,10 @@ body {
 
 /* ==================== 地图标记样式 ==================== */
 .location-marker {
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -1679,69 +1680,47 @@ body {
     font-weight: bold;
     font-size: 10px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    /* 使用与 historymap 相同的绿色图钉图片（相对 CSS 路径 ../img/） */
+    background: url("../img/marker.green.png") no-repeat center center;
+    background-size: contain;
 }
 
 /* 根据访问次数的标记尺寸 */
 .location-marker.visits-1 {
-    width: 14px;
-    height: 14px;
-    font-size: 8px;
-}
-
-.location-marker.visits-2 {
-    width: 18px;
-    height: 18px;
-    font-size: 9px;
-}
-
-.location-marker.visits-3 {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     font-size: 10px;
 }
 
-.location-marker.visits-4-plus {
-    width: 26px;
-    height: 26px;
+.location-marker.visits-2 {
+    width: 24px;
+    height: 24px;
     font-size: 11px;
 }
 
-/* 根据事件类型的标记颜色 */
-.marker-birth {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
+.location-marker.visits-3 {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
 }
 
-.marker-international {
-    background: linear-gradient(135deg, #f39c12, #e67e22);
+.location-marker.visits-4-plus {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
 }
 
-.marker-long-distance {
-    background: linear-gradient(135deg, #3498db, #2980b9);
-}
-
-.marker-short-distance {
-    background: linear-gradient(135deg, #1abc9c, #16a085);
-}
-
-.marker-activity {
-    background: linear-gradient(135deg, #27ae60, #229954);
-}
-
-.marker-mixed {
-    background: linear-gradient(135deg, #9b59b6, #8e44ad);
-}
-
-.marker-transit {
-    background: linear-gradient(135deg, #95a5a6, #7f8c8d);
-}
-
-.marker-movement {
-    background: linear-gradient(135deg, #34495e, #2c3e50);
-}
+/* 事件类型 class 保留以便未来扩展，但不再改变底图颜色（统一用 marker.green.png） */
+.marker-birth {}
+.marker-international {}
+.marker-long-distance {}
+.marker-short-distance {}
+.marker-activity {}
+.marker-mixed {}
+.marker-transit {}
+.marker-movement {}
 
 .location-marker.current {
-    animation: pulse 1s infinite;
-    transform: scale(1.3);
     z-index: 1000;
 }
 
@@ -1749,17 +1728,35 @@ body {
     opacity: 0.7;
 }
 
-@keyframes pulse {
+/* 当前事件的红色呼吸光晕（沿用 historymap 的 breath_red.png） */
+.breath-highlight-icon {
+    /* 放大尺寸，让光晕更明显 */
+    width: 110px;
+    height: 110px;
+    background: url("../img/breath_red.png") no-repeat center center;
+    background-size: cover;
+    /* 强烈外发光，模拟高亮呼吸灯效果 */
+    box-shadow: 0 0 80px 25px rgba(255, 0, 0, 1);
+    border-radius: 50%;
+    /* 初始透明度为 0，由动画控制显隐 */
+    opacity: 0.0;
+    pointer-events: none;
+    /* 确保在普通标记之上 */
+    z-index: 2000;
+    /* 与底图进行高亮混合，增强亮度 */
+    mix-blend-mode: screen;
+    animation: breath-glow 1.2s ease-out infinite;
+}
+
+@keyframes breath-glow {
     0% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.7);
+        opacity: 0.15;
     }
-
-    70% {
-        box-shadow: 0 0 0 15px rgba(52, 152, 219, 0);
+    40% {
+        opacity: 1.0;
     }
-
     100% {
-        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+        opacity: 0.15;
     }
 }
 
