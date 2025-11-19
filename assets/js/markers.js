@@ -9,6 +9,38 @@ import { showDetailPanel } from "./panels.js";
 import { ensureMarkersInteractivity } from "./map.js";
 
 /**
+ * 从完整地点路径中提取最末级城市名
+ * 例如："中国 湖南省 长沙市 开福区" -> "开福区"
+ * 或："中国 北京市" -> "北京市"
+ */
+function extractCityName(locationPath) {
+  if (!locationPath) {
+    return "";
+  }
+
+  // 按空格分割路径
+  const parts = locationPath.trim().split(/\s+/);
+
+  if (parts.length === 0) {
+    return "";
+  }
+
+  // 返回最后一级
+  let cityName = parts[parts.length - 1];
+
+  // 如果最后一级是区/县，且长度较短，可以考虑保留上一级
+  // 例如："开福区" -> "长沙·开福区"
+  if (parts.length >= 2 && cityName.length <= 3 && (cityName.endsWith("区") || cityName.endsWith("县"))) {
+    const parentCity = parts[parts.length - 2];
+    // 去掉"市"、"省"等后缀，简化显示
+    const simplifiedParent = parentCity.replace(/[省市]/g, "");
+    cityName = `${simplifiedParent}·${cityName}`;
+  }
+
+  return cityName;
+}
+
+/**
  * 按地理位置聚合事件
  */
 export function groupEventsByLocation(events, maxIndex) {
@@ -263,6 +295,18 @@ export function createLocationMarker(
     keyboard: true,
     zIndexOffset: 1000,
   });
+
+  // 添加永久显示的城市名标签
+  const cityName = extractCityName(location);
+  if (cityName) {
+    marker.bindTooltip(cityName, {
+      permanent: true,
+      direction: "right",
+      className: "city-label-tooltip",
+      offset: [8, 0],
+      opacity: 0.95,
+    });
+  }
 
   const clickHandler = function (e) {
     e.originalEvent.stopPropagation();

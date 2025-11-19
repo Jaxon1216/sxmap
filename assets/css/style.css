@@ -1998,6 +1998,13 @@ body {
         min-height: calc(100vh - 80px);
     }
 
+    /* 城市标签移动端适配 */
+    .city-label-tooltip {
+        font-size: 10px;
+        padding: 2px 2px;
+        letter-spacing: 0.5px;
+    }
+
     .leaflet-control-layers {
         padding: 6px 8px !important;
         min-width: 90px;
@@ -2013,6 +2020,47 @@ body {
         height: 13px;
         margin-right: 5px;
     }
+}
+
+/* ==================== 城市名称标签样式 - 淡雅风格 ==================== */
+.city-label-tooltip {
+    background: rgba(250, 248, 245, 0.95);
+    border: 1px solid rgba(180, 160, 130, 0.4);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(123, 104, 82, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    color: #7b6852;
+    font-size: 10px;
+    font-weight: 400;
+    font-family: 'KaiTi', '楷体', 'STKaiti', '华文楷体', serif;
+    letter-spacing: 1px;
+    padding: 2px 2px;
+    white-space: nowrap;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+}
+
+.city-label-tooltip::before {
+    border-right-color: rgba(180, 160, 130, 0.4);
+}
+
+/* 移除默认的 tooltip 箭头边框 */
+.leaflet-tooltip-left.city-label-tooltip::before {
+    display: none;
+}
+
+.leaflet-tooltip-right.city-label-tooltip::before {
+    display: none;
+}
+
+/* 当前事件的标签突出显示 */
+.location-marker.current + .city-label-tooltip {
+    background: linear-gradient(135deg, rgba(245, 230, 211, 0.98) 0%, rgba(232, 212, 184, 0.98) 100%);
+    border-color: rgba(196, 112, 78, 0.5);
+    color: #c4704e;
+    font-weight: 700;
+    box-shadow: 0 3px 12px rgba(196, 112, 78, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 /* ==================== 当前事件Popup样式 ==================== */

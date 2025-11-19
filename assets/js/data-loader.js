@@ -111,9 +111,9 @@ export function processTrajectoryData(data) {
 
 /**
  * 加载轨迹事件数据
- * @param {string} dataFile - 数据文件路径，默认为毛泽东数据
+ * @param {string} dataFile - 数据文件路径
  */
-export async function loadTrajectoryData(dataFile = "data/mao_trajectory_events.json") {
+export async function loadTrajectoryData(dataFile) {
   try {
     console.log("开始加载数据:", dataFile);
     const response = await fetch(dataFile);

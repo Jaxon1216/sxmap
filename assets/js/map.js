@@ -41,31 +41,31 @@ export function initMap() {
   );
 
   // 卫星影像标注图层（路网、地名等）
-  const satelliteLabelLayer = L.tileLayer(
-    "https://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
-    {
-      subdomains: "1234",
-      attribution: "© 高德地图",
-      maxZoom: 18,
-    }
-  );
+  // const satelliteLabelLayer = L.tileLayer(
+  //   "https://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",
+  //   {
+  //     subdomains: "1234",
+  //     attribution: "© 高德地图",
+  //     maxZoom: 18,
+  //   }
+  // );
 
   // 创建卫星图层组
-  const satelliteGroup = L.layerGroup([satelliteLayer, satelliteLabelLayer]);
+  const satelliteGroup = L.layerGroup([satelliteLayer]);
 
   // 默认添加卫星地图
   satelliteGroup.addTo(state.map);
 
   // 添加图层切换控件
-  const baseMaps = {
-    "🛰️ 卫星": satelliteGroup,
-    "🗺️ 普通": normalLayer,
-  };
+  // const baseMaps = {
+  //   "🛰️ 卫星": satelliteGroup,
+  //   "🗺️ 普通": normalLayer,
+  // };
 
-  L.control.layers(baseMaps, null, {
-    position: "bottomleft",
-    collapsed: false,
-  }).addTo(state.map);
+  // L.control.layers(baseMaps, null, {
+  //   position: "bottomleft",
+  //   collapsed: false,
+  // }).addTo(state.map);
 
   console.log("地图初始化完成");
 }
