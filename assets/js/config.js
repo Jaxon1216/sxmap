@@ -2,6 +2,29 @@
  * 全局配置文件
  */
 
+// ==================== 导航配置 ====================
+export const NAVIGATION_CONFIG = [
+  {
+    id: "mao",
+    name: "毛泽东生平",
+    dataFile: "data/mao_trajectory_events.json",
+    startDate: "1893-12-26",
+    endDate: "1976-09-09",
+    description: "毛泽东生平地理轨迹",
+    active: true, // 默认激活
+  },
+  // 后续可以添加更多导航项
+  // {
+  //   id: "su_shi",
+  //   name: "苏轼生平",
+  //   dataFile: "data/su_shi_trajectory_events.json",
+  //   startDate: "1037-01-08",
+  //   endDate: "1101-08-24",
+  //   description: "苏轼生平地理轨迹",
+  //   active: false,
+  // },
+];
+
 // ==================== 全局常量 ====================
 export const INTERNATIONAL_COORDINATES = {
   "俄罗斯 莫斯科": [37.6176, 55.7558],

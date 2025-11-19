@@ -111,10 +111,12 @@ export function processTrajectoryData(data) {
 
 /**
  * 加载轨迹事件数据
+ * @param {string} dataFile - 数据文件路径，默认为毛泽东数据
  */
-export async function loadTrajectoryData() {
+export async function loadTrajectoryData(dataFile = "data/mao_trajectory_events.json") {
   try {
-    const response = await fetch("data/mao_trajectory_events.json");
+    console.log("开始加载数据:", dataFile);
+    const response = await fetch(dataFile);
     if (!response.ok) {
       throw new Error(
         `加载事件数据失败: ${response.status} - ${response.statusText}`
@@ -128,9 +130,10 @@ export async function loadTrajectoryData() {
       !Array.isArray(rawData.events) ||
       rawData.events.length === 0
     ) {
-      throw new Error("mao_trajectory_events.json 格式错误或事件数据为空");
+      throw new Error(`${dataFile} 格式错误或事件数据为空`);
     }
 
+    console.log("数据加载成功:", dataFile, "事件数:", rawData.events.length);
     return processTrajectoryData(rawData);
   } catch (error) {
     console.error("加载轨迹数据失败:", error);
