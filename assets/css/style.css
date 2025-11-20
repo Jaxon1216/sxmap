@@ -1728,35 +1728,75 @@ body {
     opacity: 0.7;
 }
 
-/* 当前事件的红色呼吸光晕（沿用 historymap 的 breath_red.png） */
-.breath-highlight-icon {
-    /* 放大尺寸，让光晕更明显 */
-    width: 110px;
-    height: 110px;
-    background: url("../img/breath_red.png") no-repeat center center;
-    background-size: cover;
-    /* 强烈外发光，模拟高亮呼吸灯效果 */
-    box-shadow: 0 0 80px 25px rgba(255, 0, 0, 1);
-    border-radius: 50%;
-    /* 初始透明度为 0，由动画控制显隐 */
-    opacity: 0.0;
+/* 当前事件的红色呼吸灯 - 波纹扩散效果 */
+.breath-highlight-wrapper {
     pointer-events: none;
-    /* 确保在普通标记之上 */
-    z-index: 2000;
-    /* 与底图进行高亮混合，增强亮度 */
-    mix-blend-mode: screen;
-    animation: breath-glow 1.2s ease-out infinite;
+    /* 降低层级，确保在标记点和其他覆盖物下方 */
+    z-index: -1;
 }
 
-@keyframes breath-glow {
+.ripple-container {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.ripple-wave {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px; /* 居中对齐 */
+    border-radius: 50%;
+    /* 清晰的圆环边框 */
+    border: 2px solid rgba(255, 50, 50, 0.9);
+    /* 半透明填充 */
+    background: rgba(255, 50, 50, 0.15);
+    /* 柔和的外发光 */
+    box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.4),
+                inset 0 0 5px 1px rgba(255, 100, 100, 0.3);
+    opacity: 0;
+    transform: scale(0);
+    animation: ripple-expand 2s ease-out infinite;
+}
+
+/* 第二个波纹延迟 0.6s */
+.ripple-wave-2 {
+    animation-delay: 0.6s;
+}
+
+/* 第三个波纹延迟 1.2s */
+.ripple-wave-3 {
+    animation-delay: 1.2s;
+}
+
+@keyframes ripple-expand {
     0% {
-        opacity: 0.15;
+        opacity: 0;
+        transform: scale(0.5);
+        border-width: 4px;
     }
-    40% {
-        opacity: 1.0;
+    10% {
+        opacity: 1;
+        transform: scale(0.8);
+        border-width: 2.5px;
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.5);
+        border-width: 1.3px;
+    }
+    80% {
+        opacity: 0.5;
+        transform: scale(2.5);
+        border-width: 0.8px;
     }
     100% {
-        opacity: 0.15;
+        opacity: 0;
+        transform: scale(3);
+        border-width: 0.67px;
     }
 }
 

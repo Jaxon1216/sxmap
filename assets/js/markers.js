@@ -412,7 +412,9 @@ export function updateEventMarkers(targetIndex) {
 let highlightMarker = null;
 
 function updateHighlightMarker(latLng) {
-  if (!state.map) return;
+  if (!state.map) {
+    return;
+  }
 
   // 没有当前位置时隐藏高亮
   if (!latLng) {
@@ -424,18 +426,28 @@ function updateHighlightMarker(latLng) {
   }
 
   if (!highlightMarker) {
+    // 创建波纹容器HTML，包含3个波纹圆环
+    const rippleHTML = `
+      <div class="ripple-container">
+        <div class="ripple-wave ripple-wave-1"></div>
+        <div class="ripple-wave ripple-wave-2"></div>
+        <div class="ripple-wave ripple-wave-3"></div>
+      </div>
+    `;
+
     const icon = L.divIcon({
-      className: "breath-highlight-icon",
-      iconSize: [80, 80],
-      iconAnchor: [40, 40],
+      className: "breath-highlight-wrapper",
+      html: rippleHTML,
+      iconSize: [0, 0], // 设置为0，让波纹从标记点中心扩散
+      iconAnchor: [0, 0], // 锚点设置为0，波纹从标记点位置开始
     });
 
     highlightMarker = L.marker(latLng, {
       icon,
       interactive: false,
       keyboard: false,
-      // 提高 zIndexOffset，确保呼吸灯在普通标记之上
-      zIndexOffset: 1500,
+      // 降低 zIndexOffset，确保呼吸灯在标记点下方，不遮挡其他覆盖物
+      zIndexOffset: -1000,
     });
 
     highlightMarker.addTo(state.map);
