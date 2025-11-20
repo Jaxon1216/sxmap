@@ -336,7 +336,7 @@ export function createLocationMarker(
           <span class="section-title-inline">心境分析</span>
         </div>
         <div class="mood-list-item">
-          ${currentEvent.event}
+          ${currentEvent.mood || currentEvent.event}
         </div>
       </div>
     `;

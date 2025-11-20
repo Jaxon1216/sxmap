@@ -23,6 +23,28 @@ export function updateCurrentEventInfo(event) {
     }
   });
 
+  // 更新右上角相关原文 (Mood List Container)
+  // 使用 try-catch 和更具体的检查来确保更新
+  try {
+    const moodListContainer = document.getElementById("mood-list-container");
+    if (moodListContainer) {
+      const originalText = event.originalText || "暂无相关原文";
+      // 清空内容
+      moodListContainer.innerHTML = "";
+      
+      // 创建新元素
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "mood-list-item";
+      itemDiv.textContent = originalText;
+      
+      moodListContainer.appendChild(itemDiv);
+    } else {
+      console.warn("Element mood-list-container not found!");
+    }
+  } catch (error) {
+    console.error("Error updating mood list container:", error);
+  }
+
   const mobileElements = {
     "event-date-mobile": event.date,
     "event-title-mobile": event.event,
