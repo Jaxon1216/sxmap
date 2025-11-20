@@ -331,9 +331,13 @@ export function createLocationMarker(
   // 如果是当前高亮的点，显示 popup
   if (isCurrent && currentEvent) {
     const popupContent = `
-      <div style="font-family: sans-serif;">
-        <div style="font-size: 14px; margin-bottom: 4px;"><span style="margin-right: 10px;">${currentEvent.date}</span><span style="color: #666;">${location}</span></div>
-        <div style="font-size: 13px;">${currentEvent.event}</div>
+      <div class="mood-popup-container">
+        <div class="mood-popup-header">
+          <span class="section-title-inline">心境分析</span>
+        </div>
+        <div class="mood-list-item">
+          ${currentEvent.event}
+        </div>
       </div>
     `;
 
