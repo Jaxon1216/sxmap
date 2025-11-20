@@ -315,6 +315,13 @@ body {
     border-bottom: 2px solid rgba(180, 160, 130, 0.2);
 }
 
+/* 心境分析标题区域（复用事件列表标题风格） */
+.mood-header-section {
+    padding: 12px 20px;
+    background: rgba(180, 160, 130, 0.05);
+    border-bottom: 2px solid rgba(180, 160, 130, 0.2);
+}
+
 .events-header-left {
     display: flex;
     align-items: center;
@@ -400,6 +407,50 @@ body {
     overflow-y: auto;
     padding: 12px 20px 0 20px;
     scroll-behavior: smooth;
+}
+
+/* 心境分析列表容器，高度随内容自适应 */
+.mood-list-section {
+    padding: 0;
+    background: rgba(180, 160, 130, 0.02);
+}
+
+.mood-list-container {
+    padding: 12px 20px 12px 20px;
+    overflow: visible;
+}
+
+/* 心境分析条目（方案二：极简虚线提示框） */
+.mood-list-item {
+    cursor: default;
+    /* 对齐事件标题的文字风格 */
+    color: #7b6852;
+    font-size: 12px;
+    line-height: 1.6;
+    font-weight: 500;
+    /* 覆盖事件列表的左侧棕色边线等 */
+    border-left: none;
+    margin-bottom: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px dashed rgba(184, 165, 137, 0.9);
+    box-shadow: none;
+    text-align: left; /* 内容文字左对齐 */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 覆盖事件列表的 hover 动画，让心境分析条目悬停时保持静止 */
+.mood-list-item:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: none;
+    box-shadow: none;
+}
+
+/* 确保心境条目不显示事件列表的左侧棕色边线 */
+.event-list-item.mood-list-item {
+    border-left: none;
 }
 
 /* 自定义滚动条样式 */
