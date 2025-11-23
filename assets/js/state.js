@@ -18,7 +18,7 @@ export const state = {
   // 播放控制
   isPlaying: false,
   playInterval: null,
-  currentPlaySpeed: 1000,
+  currentPlaySpeed: 5000,
 
   // 标记和路径
   eventMarkers: [],

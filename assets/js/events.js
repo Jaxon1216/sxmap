@@ -6,7 +6,7 @@ import { state } from "./state.js";
 import { isMobileDevice } from "./utils.js";
 import { togglePlay, previousEvent, nextEvent, handleTimelineKeydown, copyCurrentEventData } from "./controls.js";
 import { showEventAtIndex } from "./paths.js";
-import { initAnimationControls, initCustomSpeedSelect } from "./animations.js";
+import { initAnimationControls, initCustomSpeedSelect, setGlobalPlaySpeed } from "./animations.js";
 import { initDetailPanel } from "./panels.js";
 import { initMobileInteractions } from "./mobile.js";
 import { initCameraFollowControl } from "./camera.js";
@@ -155,11 +155,7 @@ export function bindEvents() {
   const speedSelect = document.getElementById("speed-select");
   if (speedSelect) {
     speedSelect.addEventListener("change", (e) => {
-      state.currentPlaySpeed = parseInt(e.target.value);
-      if (state.isPlaying) {
-        togglePlay();
-        setTimeout(() => togglePlay(), 100);
-      }
+      setGlobalPlaySpeed(parseInt(e.target.value));
     });
   }
   initCustomSpeedSelect();
@@ -169,12 +165,7 @@ export function bindEvents() {
     btn.addEventListener("click", (_e) => {
       speedBtns.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
-      state.currentPlaySpeed = parseInt(btn.dataset.speed);
-
-      if (state.isPlaying) {
-        togglePlay();
-        setTimeout(() => togglePlay(), 100);
-      }
+      setGlobalPlaySpeed(parseInt(btn.dataset.speed));
     });
   });
 

@@ -103,14 +103,45 @@ function updateAnimationDuration(duration) {
 }
 
 /**
+ * 统一设置播放速度，并自动调整路径动画时长
+ */
+export function setGlobalPlaySpeed(speed) {
+  state.currentPlaySpeed = speed;
+
+  // 自动调整路径动画时长，确保小于播放间隔
+  // 逻辑：保留 300ms 缓冲，最小 200ms
+  // 例如：速度 1000ms -> 动画 700ms
+  const newPathDuration = Math.max(200, speed - 300);
+  state.animationConfig.pathDuration = newPathDuration;
+  updateAnimationDuration(newPathDuration);
+
+  // 同步到滑块 UI (如果在调试面板中存在)
+  const pathDurationSlider = document.getElementById("path-duration");
+  const pathDurationDisplay = document.getElementById("path-duration-display");
+  if (pathDurationSlider && pathDurationDisplay) {
+    pathDurationSlider.value = newPathDuration;
+    pathDurationDisplay.textContent = (newPathDuration / 1000).toFixed(1) + "s";
+  }
+
+  // 如果正在播放，重启播放以立即应用新速度
+  if (state.isPlaying) {
+    togglePlay();
+    setTimeout(() => togglePlay(), 100);
+  }
+}
+
+/**
  * 初始化自定义速度选择器
  */
 export function initCustomSpeedSelect() {
-  const customSelect = document.getElementById("custom-speed-select");
-  if (!customSelect) {
-    return;
-  }
+  const customSelects = document.querySelectorAll(".custom-select");
+  
+  customSelects.forEach(customSelect => {
+    initSingleCustomSelect(customSelect);
+  });
+}
 
+function initSingleCustomSelect(customSelect) {
   const selectDisplay = customSelect.querySelector(".select-display");
   const selectText = customSelect.querySelector(".select-text");
   const selectDropdown = customSelect.querySelector(".select-dropdown");
@@ -122,6 +153,13 @@ export function initCustomSpeedSelect() {
     if (isOpen) {
       return;
     }
+
+    // Close other dropdowns first
+    document.querySelectorAll(".custom-select.open").forEach(el => {
+      if (el !== customSelect) {
+        el.classList.remove("open");
+      }
+    });
 
     isOpen = true;
     customSelect.classList.add("open");
@@ -160,18 +198,21 @@ export function initCustomSpeedSelect() {
     const value = option.dataset.value;
     const text = option.textContent;
 
-    selectText.textContent = text;
-    customSelect.dataset.value = value;
+    // update UI for ALL selects to keep them in sync
+    document.querySelectorAll(".custom-select").forEach(sel => {
+        const txt = sel.querySelector(".select-text");
+        if (txt) txt.textContent = text;
+        sel.dataset.value = value;
+        
+        const opts = sel.querySelectorAll(".select-option");
+        opts.forEach((opt) => opt.classList.remove("selected"));
+        
+        // find matching option in this select
+        const matchingOpt = Array.from(opts).find(o => o.dataset.value === value);
+        if (matchingOpt) matchingOpt.classList.add("selected");
+    });
 
-    selectOptions.forEach((opt) => opt.classList.remove("selected"));
-    option.classList.add("selected");
-
-    state.currentPlaySpeed = parseInt(value);
-
-    if (state.isPlaying) {
-      togglePlay();
-      setTimeout(() => togglePlay(), 100);
-    }
+    setGlobalPlaySpeed(parseInt(value));
 
     closeDropdown();
   }
@@ -240,7 +281,7 @@ export function initCustomSpeedSelect() {
 
   customSelect.setAttribute("tabindex", "0");
 
-  const initialValue = customSelect.dataset.value || "1000";
+  const initialValue = customSelect.dataset.value || "3000";
   const initialOption = customSelect.querySelector(
     `[data-value="${initialValue}"]`
   );

@@ -150,14 +150,24 @@ export function getSpeedLabel(speed) {
  * 更新播放速度UI
  */
 export function updateSpeedUI() {
-  const speedSelect = document.getElementById("custom-speed-select");
-  if (speedSelect) {
+  const speedSelects = document.querySelectorAll(".custom-select");
+  speedSelects.forEach((speedSelect) => {
     speedSelect.dataset.value = state.currentPlaySpeed.toString();
     const selectText = speedSelect.querySelector(".select-text");
     if (selectText) {
       selectText.textContent = getSpeedLabel(state.currentPlaySpeed);
     }
-  }
+
+    // 更新选中状态
+    const options = speedSelect.querySelectorAll(".select-option");
+    options.forEach((opt) => opt.classList.remove("selected"));
+    const activeOpt = Array.from(options).find(
+      (opt) => parseInt(opt.dataset.value) === state.currentPlaySpeed
+    );
+    if (activeOpt) {
+      activeOpt.classList.add("selected");
+    }
+  });
 }
 
 /**
