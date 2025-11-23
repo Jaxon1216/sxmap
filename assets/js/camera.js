@@ -13,6 +13,19 @@ export function handleCameraFollow(currentEvent, previousIndex, animated = true)
     return;
   }
 
+  // 为了保证当前点尽量出现在可视区域中心，优先直接将镜头对准当前事件的终点坐标
+  if (currentEvent.endCoords) {
+    const [lng, lat] = currentEvent.endCoords;
+    const panOptions = {
+      animate: animated,
+      duration: animated ? state.animationConfig.cameraPanDuration / 1000 : 0,
+      easeLinearity: 0.5,
+    };
+    state.map.setView([lat, lng], Math.max(state.map.getZoom(), 6), panOptions);
+    return;
+  }
+
+  // 若没有终点坐标，退回到路径边界框的方式
   const bounds = calculatePathBounds(currentEvent, previousIndex);
   if (bounds && bounds.isValid()) {
     const panOptions = {
@@ -25,14 +38,6 @@ export function handleCameraFollow(currentEvent, previousIndex, animated = true)
     };
 
     state.map.fitBounds(bounds, panOptions);
-  } else if (currentEvent.endCoords) {
-    const [lng, lat] = currentEvent.endCoords;
-    const panOptions = {
-      animate: animated,
-      duration: animated ? state.animationConfig.cameraPanDuration / 1000 : 0,
-      easeLinearity: 0.5,
-    };
-    state.map.setView([lat, lng], Math.max(state.map.getZoom(), 6), panOptions);
   }
 }
 

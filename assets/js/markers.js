@@ -268,25 +268,42 @@ export function createLocationMarker(
     markerClasses.push("visited");
   }
 
-  const markerContent = visitCount > 1 ? visitCount.toString() : "";
+  // 构建 HTML 结构：呼吸灯在下，图钉在上
+  let innerHTML = "";
 
-  // 为适配 marker.green.png，放大标记尺寸，桌面端稍大一点，移动端略小
-  const baseSize = isMobileDevice() ? 28 : 32;
+  // 1. 如果是当前点，添加呼吸灯层
+  if (isCurrent) {
+    innerHTML += '<div class="breath-wave"></div>';
+    innerHTML += '<div class="breath-center"></div>';
+  }
+
+  // 2. 添加绿色图钉图片
+  // 确保图片填满 divIcon 容器
+  innerHTML += '<img src="assets/img/marker.green.png" class="pin-img" style="width:100%; height:100%; display:block; pointer-events:none;">';
+
+  // 3. 添加访问次数数字
+  if (visitCount > 1) {
+    innerHTML += `<span class="visit-count">${visitCount}</span>`;
+  }
+
+  // 为适配 marker.green.png，标记尺寸与 CSS 中的 visits-* 保持一致
+  // 用户要求调大 Marker，基准设为 30
+  const baseSize = 30;
   const iconSizes = {
-    1: [baseSize, baseSize],
-    2: [baseSize + 6, baseSize + 6],
-    3: [baseSize + 12, baseSize + 12],
-    4: [baseSize + 18, baseSize + 18],
+    1: [baseSize, baseSize],          // 30x30
+    2: [baseSize + 6, baseSize + 6],  // 36x36
+    3: [baseSize + 12, baseSize + 12], // 42x42
+    4: [baseSize + 18, baseSize + 18]  // 48x48
   };
 
   const sizeKey = visitCount >= 4 ? 4 : visitCount || 1;
   const iconSize = iconSizes[sizeKey];
-  // 让图钉底部尖端落在坐标点附近，稍微下移 anchor
-  const iconAnchor = [iconSize[0] / 2, iconSize[1] * 0.85];
+  // 让图钉底部尖端落在坐标点位置：锚点取底边中点
+  const iconAnchor = [iconSize[0] / 2, iconSize[1]];
 
   const markerElement = L.divIcon({
     className: markerClasses.join(" "),
-    html: markerContent,
+    html: innerHTML,
     iconSize: iconSize,
     iconAnchor: iconAnchor,
   });
@@ -413,54 +430,10 @@ export function updateEventMarkers(targetIndex) {
 
 // ==================== 呼吸灯高亮标记 ====================
 
-let highlightMarker = null;
-
 function updateHighlightMarker(latLng) {
-  if (!state.map) {
-    return;
-  }
-
-  // 没有当前位置时隐藏高亮
-  if (!latLng) {
-    if (highlightMarker) {
-      state.map.removeLayer(highlightMarker);
-      highlightMarker = null;
-    }
-    return;
-  }
-
-  if (!highlightMarker) {
-    // 创建波纹容器HTML，包含3个波纹圆环
-    const rippleHTML = `
-      <div class="ripple-container">
-        <div class="ripple-wave ripple-wave-1"></div>
-        <div class="ripple-wave ripple-wave-2"></div>
-        <div class="ripple-wave ripple-wave-3"></div>
-      </div>
-    `;
-
-    const icon = L.divIcon({
-      className: "breath-highlight-wrapper",
-      html: rippleHTML,
-      iconSize: [0, 0], // 设置为0，让波纹从标记点中心扩散
-      iconAnchor: [0, 0], // 锚点设置为0，波纹从标记点位置开始
-    });
-
-    highlightMarker = L.marker(latLng, {
-      icon,
-      interactive: false,
-      keyboard: false,
-      // 降低 zIndexOffset，确保呼吸灯在标记点下方，不遮挡其他覆盖物
-      zIndexOffset: -1000,
-    });
-
-    highlightMarker.addTo(state.map);
-  } else {
-    highlightMarker.setLatLng(latLng);
-    // 如果由于地图图层清理被移除了，需要重新添加到地图上
-    if (!state.map.hasLayer(highlightMarker)) {
-      highlightMarker.addTo(state.map);
-    }
-  }
+  // 呼吸灯效果改为通过 CSS 绑定在 `.location-marker.current` 上，
+  // 这里保留函数以兼容调用，但不再创建单独的高亮标记。
+  // latLng 参数当前未使用，后续如需根据位置做相机偏移等可在此扩展。
+  return;
 }
 

@@ -1731,45 +1731,63 @@ body {
     font-weight: bold;
     font-size: 10px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    /* 使用与 historymap 相同的绿色图钉图片（相对 CSS 路径 ../img/） */
-    background: url("../img/marker.green.png") no-repeat center center;
-    background-size: contain;
+    /* 移除背景图，改用 HTML img 标签 */
+    background: transparent;
+    overflow: visible !important;
 }
 
-/* 根据访问次数的标记尺寸 */
+/* 确保图钉图片在最上层 (但数字在更上层) */
+.pin-img {
+    position: relative;
+    z-index: 2;
+}
+
+/* 数字样式 */
+.visit-count {
+    position: absolute;
+    z-index: 3;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* 根据访问次数的标记尺寸 - 同步放大 */
 .location-marker.visits-1 {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
-}
-
-.location-marker.visits-2 {
-    width: 24px;
-    height: 24px;
-    font-size: 11px;
-}
-
-.location-marker.visits-3 {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     font-size: 12px;
 }
 
-.location-marker.visits-4-plus {
-    width: 32px;
-    height: 32px;
+.location-marker.visits-2 {
+    width: 36px;
+    height: 36px;
     font-size: 13px;
 }
 
+.location-marker.visits-3 {
+    width: 42px;
+    height: 42px;
+    font-size: 14px;
+}
+
+.location-marker.visits-4-plus {
+    width: 48px;
+    height: 48px;
+    font-size: 15px;
+}
+
 /* 事件类型 class 保留以便未来扩展，但不再改变底图颜色（统一用 marker.green.png） */
-.marker-birth {}
-.marker-international {}
-.marker-long-distance {}
-.marker-short-distance {}
-.marker-activity {}
-.marker-mixed {}
-.marker-transit {}
-.marker-movement {}
+/* .marker-birth {} */
+/* .marker-international {} */
+/* .marker-long-distance {} */
+/* .marker-short-distance {} */
+/* .marker-activity {} */
+/* .marker-mixed {} */
+/* .marker-transit {} */
+/* .marker-movement {} */
 
 .location-marker.current {
     z-index: 1000;
@@ -1848,6 +1866,64 @@ body {
         opacity: 0;
         transform: scale(3);
         border-width: 0.67px;
+    }
+}
+
+/* ==================== 呼吸灯新样式 (HTML结构版) ==================== */
+
+/* 1. 扩散的波纹动画 (外圈) */
+.breath-wave {
+    position: absolute;
+    z-index: 0; /* 最底层 */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    /* 红色边框 */
+    border: 2px solid rgba(231, 76, 60, 0.8);
+    /* 内部填充淡红 */
+    background: rgba(231, 76, 60, 0.1);
+    /* 强制底边居中定位 */
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    
+    /* 动画：从小到大扩散 */
+    animation: ripple-new 2s ease-out infinite;
+}
+
+/* 2. 中心固定的实心红圈 (内圈) */
+.breath-center {
+    position: absolute;
+    z-index: 1; /* 在波纹之上，但在图钉之下 */
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #e74c3c; /* 实心红 */
+    box-shadow: 0 0 4px rgba(192, 57, 43, 0.6);
+    
+    /* 强制底边居中定位 */
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* 废弃旧的伪元素写法 */
+/* .location-marker.current::before { ... } */
+/* .location-marker.current::after { ... } */
+
+/* 新的波纹动画 */
+@keyframes ripple-new {
+    0% {
+        transform: translate(-50%, -50%) scale(0.3);
+        opacity: 1;
+        border-width: 3px;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+        border-width: 0px;
     }
 }
 
