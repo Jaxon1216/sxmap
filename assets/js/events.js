@@ -18,6 +18,7 @@ export function bindEvents() {
   const playBtn = document.getElementById("play-btn");
   const prevBtn = document.getElementById("prev-btn");
   const nextBtn = document.getElementById("next-btn");
+  const fullRouteBtn = document.getElementById("full-route-btn");
 
   if (playBtn) {
     playBtn.addEventListener("click", togglePlay);
@@ -27,6 +28,45 @@ export function bindEvents() {
   }
   if (nextBtn) {
     nextBtn.addEventListener("click", nextEvent);
+  }
+  
+  // 绑定全局路线按钮点击事件
+  if (fullRouteBtn) {
+    fullRouteBtn.addEventListener("click", () => {
+      if (state.trajectoryData && state.trajectoryData.events.length > 0) {
+        const lastIndex = state.trajectoryData.events.length - 1;
+        
+        // 停止播放
+        if (state.isPlaying) {
+          togglePlay();
+        }
+        
+        // 临时设置 isDragging 为 true，以利用其“快速/瞬间显示路径”的逻辑
+        // 这样 createMotionPath 会使用极短的 duration，且 updatePathsStatic 会自动调用 motionStart
+        const wasDragging = state.isDragging;
+        state.isDragging = true;
+
+        // 跳转到最后一个事件
+        showEventAtIndex(lastIndex, false, true);
+        
+        // 恢复状态
+        state.isDragging = wasDragging;
+        
+        // 调整视角以显示完整轨迹
+        setTimeout(() => {
+          if (state.map && state.locationMarkers.size > 0) {
+            const markers = Array.from(state.locationMarkers.values());
+            if (markers.length > 0) {
+              const group = L.featureGroup(markers);
+              state.map.fitBounds(group.getBounds(), {
+                padding: [50, 50],
+                maxZoom: 8
+              });
+            }
+          }
+        }, 500); // 稍微延迟以等待标记和路径更新
+      }
+    });
   }
 
   const slider = document.getElementById("timeline-slider");
@@ -160,4 +200,3 @@ export function bindEvents() {
     }
   });
 }
-

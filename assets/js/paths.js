@@ -113,6 +113,7 @@ export function updatePathStyle(path, isLatest) {
  * 静态更新路径（无动画）
  */
 export function updatePathsStatic(targetIndex) {
+  // 移除旧路径
   state.pathLayers.forEach((path) => {
     if (path._map) {
       state.map.removeLayer(path);
@@ -340,4 +341,3 @@ export function showEventAtIndex(index, animated = true, isUserDrag = false) {
     }, state.animationConfig.pathDuration + 100);
   }
 }
-
