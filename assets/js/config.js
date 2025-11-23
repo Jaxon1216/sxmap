@@ -19,14 +19,14 @@ export const NAVIGATION_CONFIG = [
     name: "苏轼被贬之路",
     dataFile: "data/su_shi_trajectory_events.json",
     description: "苏轼被贬之路",
-    active: true,
+    active: false,
   },
   {
     id: "xu_xia_ke",
     name: "徐霞客的苦难与辉煌之路",
     dataFile: "data/xu_xia_ke_trajectory_events.json",
     description: "徐霞客的苦难与辉煌之路",
-    active: false,
+    active: true,
   },
 ];
 
