@@ -45,6 +45,15 @@ function playNextEvent() {
         btn.textContent = "▶";
         btn.title = "播放";
       }
+      
+      // 播放结束后自动显示全局路线
+      const fullRouteBtn = document.getElementById("full-route-btn");
+      if (fullRouteBtn) {
+        // 使用 setTimeout 稍微延迟，确保最后一个事件的动画完全结束带来的视觉连贯性
+        setTimeout(() => {
+          fullRouteBtn.click();
+        }, 500);
+      }
     }
     return;
   }
