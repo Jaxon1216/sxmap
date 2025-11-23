@@ -1752,6 +1752,7 @@ body {
     color: #fff;
     line-height: 1;
     pointer-events: none;
+    display: none;
 }
 
 /* 根据访问次数的标记尺寸 - 同步放大 */
