@@ -16,16 +16,16 @@ export const NAVIGATION_CONFIG = [
   // 后续可以添加更多导航项
   {
     id: "su_shi",
-    name: "苏轼被贬之路",
+    name: "苏轼南贬之路",
     dataFile: "data/su_shi_trajectory_events.json",
-    description: "苏轼被贬之路",
+    description: "苏轼南贬之路",
     active: false,
   },
   {
     id: "xu_xia_ke",
-    name: "徐霞客的苦难与辉煌之路",
+    name: "徐霞客西南远征之路",
     dataFile: "data/xu_xia_ke_trajectory_events.json",
-    description: "徐霞客的苦难与辉煌之路",
+    description: "徐霞客西南远征之路",
     active: true,
   },
 ];
