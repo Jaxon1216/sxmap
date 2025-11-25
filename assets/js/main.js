@@ -220,6 +220,25 @@ async function initApp() {
     });
 
     console.log("leaflet.motion 插件状态:", motionLoaded ? "已加载" : "未加载");
+
+    // 初始化引导弹窗逻辑
+    const modal = document.getElementById('intro-modal');
+    const startBtn = document.getElementById('start-journey-btn');
+    const helpBtn = document.getElementById('help-btn');
+
+    if (modal && startBtn) {
+      // 点击开始按钮关闭弹窗
+      startBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+      });
+    }
+
+    if (helpBtn && modal) {
+      // 点击帮助按钮显示弹窗
+      helpBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+      });
+    }
   } catch (error) {
     console.error("应用初始化失败:", error);
 

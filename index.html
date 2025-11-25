@@ -18,6 +18,7 @@
         <div class="nav-items" id="nav-items">
           <!-- 导航项将通过 JavaScript 动态生成 -->
         </div>
+        <button id="help-btn" class="nav-help-btn">关于此图</button>
       </div>
     </nav>
 
@@ -303,6 +304,45 @@
       <div id="loading">
         <div class="loading-spinner"></div>
         <div class="loading-text">正在加载轨迹数据...</div>
+      </div>
+    </div>
+
+    <!-- 引导弹窗 -->
+    <div id="intro-modal" class="intro-modal">
+      <div class="intro-content">
+        <div class="intro-header">
+          <h2>逆境地图：追寻巨人的苦难与辉煌</h2>
+          <p class="intro-subtitle">—— 苦难如何铸就伟大 ——</p>
+        </div>
+        
+        <div class="intro-body">
+          <div class="intro-theme-text">
+            <p>“古之立大事者，不惟有超世之才，亦必有坚忍不拔之志。”</p>
+            <p>本图专注于苏轼南贬与徐霞客西南远征中<strong>最艰难</strong>的旅程。通过追踪他们的足迹与心境变化，我们试图探寻：<strong>当人生跌入谷底时，伟大的灵魂是如何在逆境中重塑自我的？</strong></p>
+          </div>
+          
+          <div class="intro-guide">
+            <h3>🗺️ 使用指南</h3>
+            <div class="guide-steps">
+              <div class="step">
+                <span class="step-icon">▶️</span>
+                <p>点击<strong>播放</strong>，跟随巨人的足迹前行。</p>
+              </div>
+              <div class="step">
+                <span class="step-icon">🧠</span>
+                <p>观察右侧<strong>心境分析</strong>，通过原文感受其内心的波澜。</p>
+              </div>
+              <div class="step">
+                <span class="step-icon">📍</span>
+                <p>点击右侧的<strong>事件列表</strong>，快速定位具体的历史事件。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="intro-footer">
+          <button id="start-journey-btn" class="start-btn">开启旅程</button>
+        </div>
       </div>
     </div>
 
