@@ -392,31 +392,33 @@ body {
     border-color: #b8a589;
 }
 
-/* 全局路线按钮样式 */
+/* 全局路线按钮样式（方案 A：主色实心按钮，更显眼） */
 .full-route-btn {
-    background: rgba(180, 160, 130, 0.12);
-    border: 1px solid rgba(180, 160, 130, 0.3);
-    border-radius: 6px;
-    padding: 4px 8px;
+    background: #b8a589;
+    border: 1px solid #9b8565;
+    border-radius: 999px;
+    padding: 6px 14px;
     cursor: pointer;
     transition: all 0.25s ease;
-    color: #7b6852;
+    color: #ffffff;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     font-family: 'KaiTi', '楷体', 'STKaiti', '华文楷体', serif;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(123, 104, 82, 0.35);
 }
 
 .full-route-btn:hover {
-    background: rgba(180, 160, 130, 0.2);
+    background: #c7b18a;
     border-color: #b8a589;
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(123, 104, 82, 0.1);
+    box-shadow: 0 4px 14px rgba(123, 104, 82, 0.45);
 }
 
 .full-route-btn:active {
-    transform: scale(0.95);
+    transform: scale(0.95) translateY(0);
+    box-shadow: 0 1px 6px rgba(123, 104, 82, 0.3);
 }
 
 /* 第三行：事件列表 */
