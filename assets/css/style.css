@@ -2216,6 +2216,24 @@ body {
     }
 }
 
+/* ==================== 页面底部版权信息 ==================== */
+.site-footer {
+    position: fixed;
+    left: 0;
+    right: 380px; /* 与右侧控制面板宽度一致，避免覆盖面板底部 */
+    bottom: 0;
+    z-index: 3000;
+    font-size: 11px;
+    color: #7b6852;
+    text-align: left;
+    padding: 6px 18px;
+    background: linear-gradient(180deg, #f8f5f0ee 0%, #f0ebe3ee 100%);
+    border-top: 1px solid #d4c5b0;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    box-shadow: 0 -2px 8px rgba(123, 104, 82, 0.12);
+    pointer-events: none;
+}
+
 /* ==================== 城市名称标签样式 - 淡雅风格 ==================== */
 .city-label-tooltip {
     background: rgba(250, 248, 245, 0.95);
