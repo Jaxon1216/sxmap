@@ -1,7 +1,7 @@
 /*!
- * 毛泽东生平地理轨迹可视化 - 主入口文件
- * Author: sansan0
- * GitHub: https://github.com/sansan0/mao-map
+ * 苏轼与徐霞客行迹图 - 主入口文件
+ * Author: https://github.com/Jaxon1216
+ * GitHub: https://github.com/Jaxon1216
  */
 
 import { state } from "./state.js";

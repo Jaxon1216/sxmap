@@ -1,7 +1,7 @@
 {
   "name": "mao-map",
   "version": "1.0.0",
-  "description": "毛泽东生平地理轨迹可视化",
+  "description": "苏轼与徐霞客行迹图",
   "type": "module",
   "scripts": {
     "lint": "eslint assets/js/**/*.js",
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "https://github.com/sansan0/mao-map"
   },
-  "author": "sansan0",
+  "author": "https://github.com/Jaxon1216",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.57.0"

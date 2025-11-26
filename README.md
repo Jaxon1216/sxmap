@@ -1,107 +1,138 @@
 <div align="center">
 
-# 📍 跟着教员走遍中国 - 毛主席足迹地图
+苏轼与徐霞客行迹图  
 
-[![PC端访问](https://img.shields.io/badge/PC端-支持-4285F4?style=flat-square&logo=windows&logoColor=white)](#)
-[![移动端访问](https://img.shields.io/badge/移动端-支持-4285F4?style=flat-square&logo=android&logoColor=white)](#)
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-在线访问-4285F4?style=flat-square&logo=github&logoColor=white)](https://sansan0.github.io/mao-map)
+**一张用地图讲述两位旅行者生命轨迹的交互式可视化**
+
+[在线预览（PC 端）](https://map.jiangxu.net)
 
 </div>
 
-> 读万卷书，行万里路
+---
 
-本项目通过数据可视化的力量，将毛泽东主席自 1893 年至 1976 年波澜壮阔的一生，浓缩于一张可交互的动态地图之上。让那段恢弘的历史"活"起来，清晰、生动地展现伟人在中国历史洪流中的每一个关键抉择与地理印记。
+## 项目简介
 
-**在线体验：[https://sansan0.github.io/mao-map/](https://sansan0.github.io/mao-map/)**
+**苏轼与徐霞客行迹图** 是一个基于 Leaflet 的前端可视化小项目，通过时间轴动画与交互式地图，呈现：
 
-<p align="center">
-  <img src="docs/images/image.png" alt="电脑效果" />
-</p>
+- **苏轼南贬之路**：从北宋官场沉浮到谪居南方的颠沛旅程  
+- **徐霞客西南远征之路**：以足迹丈量山河的远行轨迹  
 
-## 🎯 核心功能
+项目在交互和性能上参考并改造自开源项目 **mao-map**（毛主席足迹地图），但已移除与毛泽东相关的数据与 UI，仅保留并强化与苏轼、徐霞客有关的内容。  
+原项目地址：[`sansan0/mao-map`](https://github.com/sansan0/mao-map)
 
-### 🎬 动态历史
+## 使用说明与平台支持
 
-- **时间轴播放**：点击 ▶️ 播放按钮，按时间顺序观看毛主席 83 年的人生轨迹动画
-- **时间定位**：拖动底部的时间轴，可以快速定位到特定年份，查看当时的活动
+- **仅支持 PC 端浏览器访问**：目前界面与交互只针对桌面端设计，**不支持手机和平板**，移动端访问体验可能存在严重问题。  
+- 推荐使用最新版 **Chrome / Edge / Firefox** 打开在线预览：  
+  - [https://map.jiangxu.net](https://map.jiangxu.net)
 
-### 🗺️ 交互式地图
+## 本地预览与开发
 
-- **多层级标记**：根据访问次数和事件类型智能显示不同样式的地图标记
-- **详情面板**：点击地图上任意标记，查看该地点的完整历史事件列表
-- **路径高亮**：点击事件列表项可高亮显示对应的移动路径
+项目是一个纯静态前端应用，无需打包构建，只要有一个静态 HTTP 服务即可本地预览。  
+推荐使用 Python 自带的简易 HTTP 服务器。
 
-### 📊 数据统计
+### 步骤一：克隆仓库
 
-- **实时统计**：动态显示移动次数、访问省市、国际移动等数据
-- **进度追踪**：实时显示当前播放进度、年龄、事件序号等信息
-- **可视化图表**：直观展示历史轨迹的统计信息
-
-### PC 端快捷键
-
-- **空格键**：播放 / 暂停
-- **← / →**：前一个 / 后一个事件
-- **Home / End**
-
-## 💖 星星之火
-
-无论你是发现了一个错误日期，还是想补充一段被遗漏的足迹，你的每一次贡献，都在让历史画卷更加完整。
-
-感谢诸位同志为项目的完善做出的贡献：
-
-<div align="center">
-<table>
-  <tr>
-    <td align="center" width="150">
-      <a href="https://github.com/sansan0/mao-map/issues?q=author:troilus">
-        <img src="https://github.com/troilus.png?size=64" width="64"/><br/>
-        <sub>@troilus</sub>
-      </a>
-    </td>
-    <td align="center" width="150">
-      <a href="https://github.com/sansan0/mao-map/issues?q=author:9E307">
-        <img src="https://github.com/9E307.png?size=64" width="64"/><br/>
-        <sub>@9E307</sub>
-      </a>
-    </td>
-    <td align="center" width="150">
-      <a href="https://github.com/sansan0/mao-map/issues?q=author:DoWhat6">
-        <img src="https://github.com/DoWhat6.png?size=64" width="64"/><br/>
-        <sub>@DoWhat6</sub>
-      </a>
-    </td>
-  </tr>
-</table>
-</div>
-
-每个考据者都可以在自己的考据中留下你对该事件的 comment, 你可以在 issues 中提交，由项目作者进行录入，以后考据的人多了，评论多了，我会做成弹幕在地图上滚动
-
-```json
-"userVerification": [
-  // 支持多人协同考据
-  {
-    "username": "湘江史话", // 考据者署名 (可选)
-    "comment": "一个注定将改变中华民族命运的伟人在韶山冲的农家小院中诞生。此时的中国正值内忧外患，列强瓜分，民族危亡之际。这个婴儿的啼哭声，仿佛是历史的回响，预示着一个新时代的到来。从韶山走向天安门，从农家子弟到开国领袖，毛泽东的一生将与中国人民的解放事业紧密相连，书写出波澜壮阔的历史篇章。", // 考据补充或感言 (可选)
-    "date": "2025-06-30" // 考据日期 (可选)
-  }
-]
+```bash
+git clone https://github.com/Jaxon1216/sxmap.git
+cd sxmap
 ```
 
-## 🚀 快速开始
+### 步骤二：使用 Python 启动本地服务
 
-想要贡献或查看详细的参与方式？请查看 [贡献指南](CONTRIBUTING.md)。
+- 如果你安装的是 **Python 3**：
 
-## 📞 交流与联系
+```bash
+python3 -m http.server 8000
+```
 
-- **提交贡献/BUG**：请统一通过 [GitHub Issues](https://github.com/sansan0/mao-map/issues) 提交，这是追踪和处理问题最高效的方式。
-- **交流与讨论**：欢迎关注公众号 **【硅基茶水间】**，分享你的想法。
+- 如果命令是 `python` 指向 Python 3，也可以使用：
 
-![公众号二维码](https://raw.githubusercontent.com/sansan0/sansan0/refs/heads/master/_image/weixin.png)
+```bash
+python -m http.server 8000
+```
 
-## 🌟 项目愿景
+启动成功后，在浏览器中访问：
 
-**"古为今用"**，希望这个工具能成为大家学习历史、理解历史的得力助手。
+```text
+http://localhost:8000
+```
 
-## 📄 开源协议
+页面会自动加载 `index.html`，即可在本地完整预览地图与动画效果（同在线站点，但依然只建议在 PC 浏览器中访问）。
 
-本项目采用 [GPL-3.0 License](LICENSE) 协议开源，欢迎一切形式的分享与二次创作。
+## 功能概览
+
+- **时间轴播放**
+  - **播放 / 暂停**：右侧控制面板中的「播放」按钮控制事件按时间顺序自动推进  
+  - **时间滑块**：底部时间轴支持拖动，快速定位到任意事件索引  
+
+- **交互式地图**
+  - **动态路径**：随时间推进，高亮展示从起点到终点的行进路线  
+  - **地点标记**：不同地点会聚合多次访问记录，并高亮当前事件所在位置  
+  - **城市标签**：在地图上以中文标注城市名称，当前事件对应城市会做视觉强调  
+
+- **右侧信息与原文**
+  - **事件列表**：按时间顺序列出事件，点击任一条可直接跳转到对应时间点  
+  - **相关原文**：根据当前事件展示对应文献片段（如诗文、游记等），辅助理解当时心境  
+  - **统计信息**：展示事件数量、移动次数、访问地区数量等概览数据  
+
+## 项目结构概览
+
+```text
+sxmap (๑•̀ㅂ•́)و✧
+├─ index.html              ← 单页入口，页面结构 & 各种容器
+├─ assets/
+│  ├─ css/
+│  │  └─ style.css         ← 全站样式 & 动画 & 布局
+│  ├─ img/
+│  │  ├─ breath_red.png    ← 呼吸灯特效用的小图
+│  │  └─ marker.green.png  ← 地图标记图钉
+│  └─ js/
+│     ├─ main.js           ← 入口脚本，初始化整个应用
+│     ├─ config.js         ← 配置导航、动画参数、诗句等
+│     ├─ state.js          ← 全局状态：当前事件、地图实例等
+│     ├─ map.js            ← 创建 Leaflet 地图 & 基础图层
+│     ├─ data-loader.js    ← 加载/预处理 JSON 轨迹与坐标数据
+│     ├─ paths.js          ← 生成/更新路径与动画
+│     ├─ markers.js        ← 地图标记点与 Popup
+│     ├─ navigation.js     ← 顶部导航 & 路线切换
+│     ├─ right-panel.js    ← 右侧控制面板结构和初始化
+│     ├─ ui-updates.js     ← 更新事件列表、统计数字、时间范围等 UI
+│     ├─ camera.js         ← 镜头跟随、平移缩放控制
+│     ├─ controls.js       ← 播放/暂停/拖动时间轴等控制逻辑
+│     ├─ events.js         ← 统一绑定各种 DOM 事件和交互
+│     ├─ performance.js    ← 动画性能优化与监控
+│     ├─ poetry.js         ← 播放诗句相关的小动画/效果
+│     ├─ coordinates.js    ← 地名到经纬度的转换工具
+│     ├─ panels.js         ← 详情面板等弹出层的行为
+│     ├─ path-highlight.js ← 路径高亮/反向消失等效果
+│     ├─ mobile.js         ← 移动端适配逻辑
+│     └─ utils.js          ← 通用小工具函数
+├─ data/
+│  ├─ china_regions_coordinates.json   ← 全国地名到坐标的字典
+│  ├─ su_shi_trajectory_events.json    ← 苏轼事件与轨迹数据
+│  └─ xu_xia_ke_trajectory_events.json ← 徐霞客事件与轨迹数据
+├─ README.md              ← 项目说明
+├─ package.json           ← 项目元信息 & eslint 配置入口
+└─ package-lock.json      ← npm 依赖锁定文件
+```
+
+## 开发建议
+
+- 如需调整**播放速度 / 动画节奏**，可以在：
+  - `config.js` 中修改 `DEFAULT_ANIMATION_CONFIG` 与 `CAMERA_SPEED_LEVELS`  
+  - 或通过 UI 替换速度选项的具体数值
+- 如需新增人物或线路，可以在：
+  - `data/` 中新增一份事件 JSON  
+  - 在 `config.js` 的 `NAVIGATION_CONFIG` 中追加一个导航项
+
+## 版权与致谢
+
+- 本项目基于原始开源项目 **mao-map** 修改而来，原项目地址：[`sansan0/mao-map`](https://github.com/sansan0/mao-map)  
+- 目前的数据与界面聚焦于苏轼与徐霞客的行迹，已移除原项目中与毛泽东相关的内容。  
+- 现版本由 [`https://github.com/Jaxon1216`](https://github.com/Jaxon1216) 维护。
+
+## 开源协议
+
+项目采用仓库中现有的 [`LICENSE`](LICENSE) 文件所声明的开源协议（GPL-3.0 License）。  
+欢迎在遵守协议的前提下进行学习、分享与二次创作。
